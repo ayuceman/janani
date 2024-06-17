@@ -123,7 +123,7 @@ namespace SimpleApp.Controllers
 
         public async Task<ActionResult> UploadImage()
         {
-            var categories = await _context.ImageCategories.Where(x => !x.IsDeleted).ToListAsync();
+            var categories = await _context.ImageCategories.Where(x => !x.IsDeleted && !x.IsDefault).ToListAsync();
 
             var categoryList = new SelectList(categories, "Id", "Name");
 
@@ -141,63 +141,67 @@ namespace SimpleApp.Controllers
             {
                 if (model != null)
                 {
+                    int categoryId = 0;
+
                     var categoryList = await _context.ImageCategories.ToListAsync();
 
                     var categoryDetails = categoryList.FirstOrDefault(x => x.Id == model.ImageCategoryId);
 
-                    if (categoryDetails != null)
-                    {
-                        if (model.Files != null && model.Files.Any())
-                        {
-                            // Specify your upload directory
-                            string uploadsFolder = Path.Combine(_hostingEnvironment.WebRootPath, "uploads");
-
-                            // Ensure the directory exists
-                            if (!Directory.Exists(uploadsFolder))
-                            {
-                                Directory.CreateDirectory(uploadsFolder);
-                            }
-
-                            var filesToAdd = new List<ImageDetail>();
-
-                            foreach (var file in model.Files)
-                            {
-                                string uniqueFileName = Guid.NewGuid().ToString() + "_" + file.File.FileName;
-
-                                string filePath = Path.Combine(uploadsFolder, uniqueFileName);
-
-                                using (var stream = new FileStream(filePath, FileMode.Create))
-                                {
-                                    await file.File.CopyToAsync(stream);
-                                }
-                                filesToAdd.Add(new ImageDetail()
-                                {
-                                    AlternativeText = file.AlternativeText,
-                                    ImageCategoryId = categoryDetails.Id,
-                                    ImageName = uniqueFileName,
-                                    UploadedTs = DateTime.Now,
-                                });
-                            }
-
-                            if (filesToAdd.Any())
-                            {
-                                await _context.ImageDetails.AddRangeAsync(filesToAdd);
-                                await _context.SaveChangesAsync();
-                            }
-                        }
-                        else
-                        {
-                            return Json(new { success = false, errors = "Files are empty" });
-                        }
-                    }
-                    else
+                    if (categoryDetails == null)
                     {
                         var defaultCategory = categoryList.FirstOrDefault(x => x.IsDefault);
-                        if (defaultCategory != null) model.ImageCategoryId = defaultCategory.Id;
+                        if (defaultCategory != null) categoryId = defaultCategory.Id;
                         else
                         {
                             return Json(new { success = false, errors = "Default Category is empty" });
                         }
+                    }
+                    else
+                    {
+                        categoryId = categoryDetails.Id;
+                    }
+
+                    if (model.Files != null && model.Files.Any())
+                    {
+                        // Specify your upload directory
+                        string uploadsFolder = Path.Combine(_hostingEnvironment.WebRootPath, "uploads");
+
+                        // Ensure the directory exists
+                        if (!Directory.Exists(uploadsFolder))
+                        {
+                            Directory.CreateDirectory(uploadsFolder);
+                        }
+
+                        var filesToAdd = new List<ImageDetail>();
+
+                        foreach (var file in model.Files)
+                        {
+                            string uniqueFileName = Guid.NewGuid().ToString() + "_" + file.File.FileName;
+
+                            string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+
+                            using (var stream = new FileStream(filePath, FileMode.Create))
+                            {
+                                await file.File.CopyToAsync(stream);
+                            }
+                            filesToAdd.Add(new ImageDetail()
+                            {
+                                AlternativeText = file.AlternativeText,
+                                ImageCategoryId = categoryId,
+                                ImageName = uniqueFileName,
+                                UploadedTs = DateTime.Now,
+                            });
+                        }
+
+                        if (filesToAdd.Any())
+                        {
+                            await _context.ImageDetails.AddRangeAsync(filesToAdd);
+                            await _context.SaveChangesAsync();
+                        }
+                    }
+                    else
+                    {
+                        return Json(new { success = false, errors = "Files are empty" });
                     }
                 }
 

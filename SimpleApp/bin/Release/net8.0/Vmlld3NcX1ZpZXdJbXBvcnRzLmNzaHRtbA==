@@ -1,7 +1,0 @@
-﻿@using SimpleApp
-@using SimpleApp.Models
-@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
-@using SimpleApp.BaseModel;
-@using SimpleApp.ViewModels.IncomeExpenses;
-@using SimpleApp.ViewModels.ImageGallery;
-@using Newtonsoft.Json;
