@@ -1,0 +1,167 @@
+﻿@model PaginatedList<LogViewModel>
+<h3>Income/Expenses Report Logs</h3>
+<div style="float:right;">
+    <button type="button" onclick="newReport()" class="btn btn-primary">
+        <i class="fa fa-plus" aria-hidden="true"></i>
+        Add New
+    </button>
+    <button type="button" onclick="downloadFile()" class="btn btn-info">
+        <i class="fa fa-download" aria-hidden="true"></i>  Download Sample
+    </button>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Report Log Date</th>
+            <th>Created By</th>
+            <th>Created Date</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Items)
+        {
+            <tr>
+                <td>@item.DateInString</td>
+                <td>@item.CreatedBy</td>
+                <td>@item.CreatedTs</td>
+                <td>
+                    <button type="button" class="btn btn-success" onclick="editViewReport(@item.Id)">
+                        <i class="fa fa-file" aria-hidden="true"></i> Report
+                    </button>
+                    <button type="button" class="btn btn-danger" onclick="deleteReport(@item.Id)">
+                        <i class="fa fa-trash" aria-hidden="true"></i>
+                    </button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div class="modal fade" id="newReportModal" tabindex="-1" role="dialog" aria-labelledby="newReportLabelModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="newReportLabelModal">Create New Report</h5>
+                <button type="button" class="close" data-dismiss="modal" onclick="closeModal()" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div>
+    @if (Model.HasPreviousPage)
+    {
+        @Html.ActionLink(
+                "Previous",
+                "Index",
+                new { page = Model.PageIndex - 1 },
+                new { @class = "btn btn-primary", style = "margin: 5px;" }
+                )
+
+    }
+    @if (Model.HasNextPage)
+    {
+        @Html.ActionLink(
+                "Next",
+                "Index",
+                new { page = Model.PageIndex + 1 },
+                new { @class = "btn btn-primary", style = "margin: 5px;" }
+                )
+
+    }
+</div>
+
+
+
+<script>
+    function newReport() {
+        var modal = $('#newReportModal');
+        $.ajax({
+            url: '@Url.Action("AddOrUpdateView", "IncomeExpenses")',
+            type: 'GET',
+            success: function (data) {
+                modal.find('.modal-body').html(data);
+                modal.modal('show');
+            }
+        });
+    }
+    function closeModal() {
+        var modal = $('#newReportModal');
+        console.log(modal);
+        modal.modal('hide');
+    }
+
+    function editViewReport(id) {
+        var url = '@Url.Action("Report", "IncomeExpenses")' + '?id=' + id;
+        window.location.href = url;
+    }
+
+    function deleteReport(id) {
+        var isconfirm = confirm("Are you sure, you want to remove this report?");
+        if (isconfirm) {
+            $.ajax({
+                url: '@Url.Action("DeleteReport", "IncomeExpenses")',
+                type: 'POST',
+                data: { reportLogId: id }, // Data to send to the server
+                success: function (response) {
+                    alert("Deleted successfully");
+                    var url = '@Url.Action("Index", "IncomeExpenses")';
+                    window.location.href = url;
+                },
+                error: function (xhr, status, error) {
+                    console.error('Error deleting report:', error);
+                    // Handle AJAX error (optional)
+                }
+            });
+        }
+        else return false;
+    }
+
+    function downloadFile() {
+        var isConfirm = confirm("Are you sure, you want to download sample csv?");
+        if (isConfirm) {
+            $.ajax({
+                url: '@Url.Action("DownloadSample", "IncomeExpenses")',
+                type: 'GET',
+                xhrFields: {
+                    responseType: 'blob' // Important: responseType as 'blob' to handle binary data
+                },
+                success: function (response, status, xhr) {
+                    var filename = "";
+                    var disposition = xhr.getResponseHeader('Content-Disposition');
+                    if (disposition && disposition.indexOf('attachment') !== -1) {
+                        var filenameRegex = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/;
+                        var matches = filenameRegex.exec(disposition);
+                        if (matches != null && matches[1]) {
+                            filename = matches[1].replace(/['"]/g, '');
+                        }
+                    }
+
+                    // Create a temporary anchor element
+                    var anchorElement = document.createElement('a');
+                    var url = URL.createObjectURL(response);
+                    anchorElement.href = url;
+                    anchorElement.download = filename || 'download.bin'; // Default filename if not provided
+                    document.body.appendChild(anchorElement);
+                    anchorElement.click();
+                    document.body.removeChild(anchorElement);
+
+                    // Clean up
+                    window.URL.revokeObjectURL(url);
+                },
+                error: function (xhr, status, error) {
+                    console.error('Error downloading file:', error);
+                }
+            });
+        }
+        else return false;
+    }
+
+</script>

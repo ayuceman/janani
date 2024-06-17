@@ -1,0 +1,41 @@
+﻿@model PaginatedList<ImageDetailsViewModel>
+
+    <div class="row">
+        @foreach (var item in Model.Items)
+        {
+            <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                <div class="card">
+                    <img class="card-img-top" src="@item.ImagePath" alt="@item.AlternativeText">
+                    <div class="card-body">
+                        <h5 class="card-title">@item.ImageCategory</h5>
+                        <p class="card-text">Date: @item.UploadDate.ToShortDateString()</p>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+    <div class="pagination" style="margin-bottom: 20px; text-align: right;">
+        @if (Model.HasPreviousPage)
+        {
+            @Html.ActionLink(
+                     "Previous",
+                     "Index",
+                     new { page = Model.PageIndex - 1 },
+                     new { @class = "btn btn-primary", style = "margin: 5px;" }
+                     )
+
+        }
+        @if (Model.HasNextPage)
+        {
+            @Html.ActionLink(
+                     "Next",
+                     "Index",
+                     new { page = Model.PageIndex + 1 },
+                     new { @class = "btn btn-primary", style = "margin: 5px;" }
+                     )
+
+        }
+    </div>
+
+

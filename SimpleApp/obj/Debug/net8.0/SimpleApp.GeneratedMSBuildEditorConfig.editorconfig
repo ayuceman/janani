@@ -1,0 +1,95 @@
+is_global = true
+build_property.TargetFramework = net8.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = SimpleApp
+build_property.RootNamespace = SimpleApp
+build_property.ProjectDir = C:\Users\avishek.kunwar\Desktop\simple app\SimpleApp\SimpleApp\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.RazorLangVersion = 8.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = C:\Users\avishek.kunwar\Desktop\simple app\SimpleApp\SimpleApp
+build_property._RazorSourceGeneratorDebug = 
+
+[C:/Users/avishek.kunwar/Desktop/simple app/SimpleApp/SimpleApp/Areas/Identity/Pages/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/avishek.kunwar/Desktop/simple app/SimpleApp/SimpleApp/Views/Home/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/avishek.kunwar/Desktop/simple app/SimpleApp/SimpleApp/Views/Home/Privacy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/avishek.kunwar/Desktop/simple app/SimpleApp/SimpleApp/Views/ImageCategory/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW1hZ2VDYXRlZ29yeVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/avishek.kunwar/Desktop/simple app/SimpleApp/SimpleApp/Views/ImageCategory/_AddCategory.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW1hZ2VDYXRlZ29yeVxfQWRkQ2F0ZWdvcnkuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/avishek.kunwar/Desktop/simple app/SimpleApp/SimpleApp/Views/ImageCategory/_UpdateCategory.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW1hZ2VDYXRlZ29yeVxfVXBkYXRlQ2F0ZWdvcnkuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/avishek.kunwar/Desktop/simple app/SimpleApp/SimpleApp/Views/ImageGallery/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW1hZ2VHYWxsZXJ5XEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/avishek.kunwar/Desktop/simple app/SimpleApp/SimpleApp/Views/ImageGallery/_ImageGalleryList.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW1hZ2VHYWxsZXJ5XF9JbWFnZUdhbGxlcnlMaXN0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/avishek.kunwar/Desktop/simple app/SimpleApp/SimpleApp/Views/ImageGallery/_ImageSettings.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW1hZ2VHYWxsZXJ5XF9JbWFnZVNldHRpbmdzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/avishek.kunwar/Desktop/simple app/SimpleApp/SimpleApp/Views/ImageGallery/_UploadImage.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW1hZ2VHYWxsZXJ5XF9VcGxvYWRJbWFnZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/avishek.kunwar/Desktop/simple app/SimpleApp/SimpleApp/Views/IncomeExpenses/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW5jb21lRXhwZW5zZXNcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/avishek.kunwar/Desktop/simple app/SimpleApp/SimpleApp/Views/IncomeExpenses/Report.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW5jb21lRXhwZW5zZXNcUmVwb3J0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/avishek.kunwar/Desktop/simple app/SimpleApp/SimpleApp/Views/IncomeExpenses/_AddUpdateInfoReport.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW5jb21lRXhwZW5zZXNcX0FkZFVwZGF0ZUluZm9SZXBvcnQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/avishek.kunwar/Desktop/simple app/SimpleApp/SimpleApp/Views/Shared/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/avishek.kunwar/Desktop/simple app/SimpleApp/SimpleApp/Views/Shared/_LoginPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Mb2dpblBhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/avishek.kunwar/Desktop/simple app/SimpleApp/SimpleApp/Views/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/avishek.kunwar/Desktop/simple app/SimpleApp/SimpleApp/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/avishek.kunwar/Desktop/simple app/SimpleApp/SimpleApp/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/avishek.kunwar/Desktop/simple app/SimpleApp/SimpleApp/Views/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-g3dx1z2p50
