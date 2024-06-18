@@ -70,7 +70,7 @@
 
     </header>
 
-    <main role="main" class="pb-5">
+    <main role="main">
         <div class="hero-section position-relative">
             <div class="hero-img-wrap">
                 <img src="http://13.67.72.63:9012/uploads/b0c9393e-2c76-449a-a51b-6ba498b0bb66_janani-hero-img.jpg"
@@ -83,6 +83,8 @@
                 <a class="btn btn-primary" href="#" role="button">Learn More</a>
             </div>
         </div>
+        <!-- .hero-section -->
+
         <div class="about-section text-center">
             <div class="container">
                 <h2 class="display-6 text-center fw-medium">About Us</h2>
@@ -176,13 +178,179 @@
                 </div>
             </div>
         </div>
+        <!-- .gallery-section -->
+
+        <div class="trans-report-section">
+            <div class="container">
+                <div class=" d-flex justify-content-between mb-4">
+                    <h2 class="display-6 fw-medium">Income and Expenses Report</h2>
+                    <div class="date-box">Date: 2024 June</div>
+                </div>
+                <div class="income-expense-report">
+                    <div class="income-data-wrap mb-5">
+                        <h3>Income</h3>
+                        <table class="category" data-category="Income">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Current Month Amount</th>
+                                    <th>Next Month Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="data-row" data-category-id="1">
+                                    <td><input type="text" class="form-control name" value="Salary"></td>
+                                    <td><input type="number" class="form-control current-month" value="200000.0000"
+                                            onchange="updateTotals()"></td>
+                                    <td><input type="number" class="form-control next-month" value="220000.0000"
+                                            onchange="updateTotals()"></td>
+
+                                </tr>
+                                <tr class="data-row" data-category-id="1">
+                                    <td><input type="text" class="form-control name" value="Share Profit"></td>
+                                    <td><input type="number" class="form-control current-month" value="80000.0000"
+                                            onchange="updateTotals()"></td>
+                                    <td><input type="number" class="form-control next-month" value="90000.0000"
+                                            onchange="updateTotals()"></td>
+
+                                </tr>
+                                <tr class="data-row" data-category-id="1">
+                                    <td><input type="text" class="form-control name" value="Shop Profit"></td>
+                                    <td><input type="number" class="form-control current-month" value="40000.0000"
+                                            onchange="updateTotals()"></td>
+                                    <td><input type="number" class="form-control next-month" value="45000.0000"
+                                            onchange="updateTotals()"></td>
+                                </tr>
+                                <tr class="data-row" data-category-id="1">
+                                    <td><input type="text" class="form-control name" value="Test"></td>
+                                    <td><input type="number" class="form-control current-month" value="12.0000"
+                                            onchange="updateTotals()"></td>
+                                    <td><input type="number" class="form-control next-month" value="12.0000"
+                                            onchange="updateTotals()"></td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td>
+                                        <strong>Income Total</strong>
+                                    </td>
+                                    <td class="total-current-month">320012.00</td>
+                                    <td class="total-next-month">355012.00</td>
+                                    <td></td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+
+                    <div class="exp-data-wrap">
+                        <h3>Expenses</h3>
+                        <table class="category">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Current Month Amount</th>
+                                    <th>Next Month Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="data-row" data-category-id="2">
+                                    <td><input type="text" class="form-control name" value="Food"></td>
+                                    <td><input type="number" class="form-control current-month" value="3000.0000"
+                                            onchange="updateTotals()"></td>
+                                    <td><input type="number" class="form-control next-month" value="5000.0000"
+                                            onchange="updateTotals()"></td>
+
+                                </tr>
+                                <tr class="data-row" data-category-id="2">
+                                    <td><input type="text" class="form-control name" value="Flat Rent"></td>
+                                    <td><input type="number" class="form-control current-month" value="20000.0000"
+                                            onchange="updateTotals()"></td>
+                                    <td><input type="number" class="form-control next-month" value="20000.0000"
+                                            onchange="updateTotals()"></td>
+
+                                </tr>
+                                <tr class="data-row" data-category-id="2">
+                                    <td><input type="text" class="form-control name" value="Travel"></td>
+                                    <td><input type="number" class="form-control current-month" value="4000.0000"
+                                            onchange="updateTotals()"></td>
+                                    <td><input type="number" class="form-control next-month" value="4000.0000"
+                                            onchange="updateTotals()"></td>
+
+                                </tr>
+                                <tr class="data-row" data-category-id="2">
+                                    <td><input type="text" class="form-control name" value="Electricity"></td>
+                                    <td><input type="number" class="form-control current-month" value="1200.0000"
+                                            onchange="updateTotals()"></td>
+                                    <td><input type="number" class="form-control next-month" value="1200.0000"
+                                            onchange="updateTotals()"></td>
+
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td>
+                                        <strong>Expenses Total</strong>
+                                    </td>
+                                    <td class="total-current-month">28200.00</td>
+                                    <td class="total-next-month">30200.00</td>
+                                    <td></td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+                <div class="row mt-5">
+                    <div class="col-6">
+                        <strong>Current Month Total = </strong><span id="overall-current-total"
+                            style="color: green;">291812.00</span>
+                    </div>
+                    <div class="col-6">
+                        <strong>Next Month Total = </strong><span id="overall-next-total"
+                            style="color: green;">324812.00</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- .trans-report-section -->
+
+        <div class="contact-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col contact-info-col">
+                        <h2 class="display-6 fw-medium">Contact Us</h2>
+
+                        <div class="contact-list pt-3">
+                            <ul class="list-unstyled">
+                                <li><i class="fa-solid fa-location-dot"></i>Address, City, Kathmandu,
+                                    Nepal</li>
+                                <li><i class="fa-solid fa-phone"></i>+1-234-567-890</li>
+                                <li><i class="fa-solid fa-envelope"></i>abcd@xyz.co</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col contact-form-col">
+                        <form action="#">
+                            <label for="fullname" class="form-label mb-1">Full Name</label>
+                            <input type="text" id="fullname">
+                            <label for="email" class="form-label mb-1">Email Address</label>
+                            <input type="email" id="email">
+                            <label for="subject" class="form-label mb-1">Subject</label>
+                            <input type="text" id="subject">
+                            <label for="message" class="form-label mb-1">Message</label>
+                            <textarea name="" id="message"></textarea>
+                            <button type="submit" class="btn btn-primary mt-3">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
 
-    <footer class="border-top footer text-muted pt-4 pb-4 text-center">
+    <footer class="site-footer text-muted pt-4 pb-4">
         <div class="container">
             <div class="footer-logo"><a href="/">Janani</a></div>
             <div class="footer-bottom d-flex justify-content-between">
-                <p class="copyright-text">&copy; 2024 - Janani</p>
+                <p class="copyright-text mb-0">&copy; 2024 - Janani</p>
                 <div class="footer-bootom-links">
                     <ul class="list-unstyled d-flex gap-10 mb-0">
                         <li><a href="#" class="text-decoration-none">Privacy Policy</a></li>

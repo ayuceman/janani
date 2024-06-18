@@ -215,6 +215,7 @@ button,
 [type="button"],
 [type="reset"],
 [type="submit"] {
+  appearance: button;
   -webkit-appearance: button;
 }
 
@@ -315,6 +316,7 @@ textarea {
  */
 
 [type="search"] {
+  appearance: textfield;
   -webkit-appearance: textfield;
   /* 1 */
   outline-offset: -2px;
@@ -432,7 +434,8 @@ h3,
 h4,
 h5,
 h6 {
-  color: var(--color-heading)
+  color: var(--color-heading);
+  margin-bottom: 1rem;
 }
 
 /* BUTTONS */
@@ -518,7 +521,8 @@ h6 {
 }
 
 /* ABOUT US SECTION */
-.about-section {
+.about-section,
+.trans-report-section {
   padding-top: 5rem;
   padding-bottom: 5rem;
   background-color: #f8f9fa;
@@ -540,10 +544,69 @@ h6 {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
 
+/* INCOME/EXPENSES SECTION */
+.trans-report-section table {
+  width: 100%;
+}
+
+.trans-report-section table input {
+  border-radius: 0;
+}
+
+.trans-report-section table thead th {
+  padding: 10px 15px;
+  background-color: #eee;
+}
+
+.trans-report-section table td {
+  padding: 0;
+  border: none;
+}
+
+.trans-report-section table tfoot td {
+  padding-top: 15px;
+}
+
+/* CONTACT SECTION */
+.contact-section {
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+}
+
+.contact-section .contact-list>ul {
+  display: grid;
+  gap: 15px;
+}
+
+.contact-section .contact-list>ul>li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 15px;
+}
+
+.contact-form-col form input {
+  margin-bottom: 1rem;
+  height: 50px;
+  padding: 10px 15px;
+  border-width: 1px;
+  border-radius: 5px;
+  width: 100%;
+}
+
+.contact-form-col form textarea {
+  height: 150px;
+  width: 100%;
+  border-radius: 5px;
 }
 
 /* FOOTER */
+.site-footer {
+  background-color: #f8f9fa;
+}
+
 .footer-logo {
   margin-bottom: 1rem;
 }
@@ -560,6 +623,8 @@ h6 {
 .footer-bootom-links .d-flex {
   gap: 10px;
 }
+
+
 
 /* RESPONSIVE CSS */
 @media screen and (min-width: 641px) {
