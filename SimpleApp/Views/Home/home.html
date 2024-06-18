@@ -283,17 +283,13 @@
                                             onchange="updateTotals()"></td>
                                     <td><input type="number" class="form-control next-month" value="1200.0000"
                                             onchange="updateTotals()"></td>
-
                                 </tr>
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <td>
-                                        <strong>Expenses Total</strong>
-                                    </td>
+                                    <td><strong>Expenses Total</strong></td>
                                     <td class="total-current-month">28200.00</td>
                                     <td class="total-next-month">30200.00</td>
-                                    <td></td>
                                 </tr>
                             </tfoot>
                         </table>
@@ -301,12 +297,10 @@
                 </div>
                 <div class="row mt-5">
                     <div class="col-6">
-                        <strong>Current Month Total = </strong><span id="overall-current-total"
-                            style="color: green;">291812.00</span>
+                        <strong>Current Month Total = </strong><span id="overall-current-total">291812.00</span>
                     </div>
                     <div class="col-6">
-                        <strong>Next Month Total = </strong><span id="overall-next-total"
-                            style="color: green;">324812.00</span>
+                        <strong>Next Month Total = </strong><span id="overall-next-total">324812.00</span>
                     </div>
                 </div>
             </div>
@@ -331,13 +325,13 @@
                     <div class="col contact-form-col">
                         <form action="#">
                             <label for="fullname" class="form-label mb-1">Full Name</label>
-                            <input type="text" id="fullname">
+                            <input type="text" id="fullname" required>
                             <label for="email" class="form-label mb-1">Email Address</label>
-                            <input type="email" id="email">
+                            <input type="email" id="email" required>
                             <label for="subject" class="form-label mb-1">Subject</label>
-                            <input type="text" id="subject">
+                            <input type="text" id="subject" required>
                             <label for="message" class="form-label mb-1">Message</label>
-                            <textarea name="" id="message"></textarea>
+                            <textarea name="" id="message" required></textarea>
                             <button type="submit" class="btn btn-primary mt-3">Submit</button>
                         </form>
                     </div>
