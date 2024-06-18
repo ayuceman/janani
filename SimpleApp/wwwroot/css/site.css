@@ -509,6 +509,7 @@ h6 {
 
 .hero-section .hero-desc h1 {
   font-family: var(--font-heading);
+  color: #fff;
   margin: 0;
 }
 
