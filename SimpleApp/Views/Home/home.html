@@ -20,6 +20,10 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- Select2 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+    <!-- Slick CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css"
+        integrity="sha512-yHknP1/AwR+yx26cB1y0cjvQUMvEa2PFzt1c9LlS4pRQ5NOTZFWbhBig+X9G9eYW/8m0/4OXNx8pxJ6z57x0dw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <link rel="stylesheet" href="../../wwwroot/css/site.css" asp-append-version="true" />
 </head>
@@ -27,7 +31,7 @@
 <body>
     <header class="border-bottom">
         <div class="container">
-            <div class="header-top d-flex justify-content-between pt-4">
+            <div class="header-top d-flex justify-content-between align-items-center pt-4 pb-2">
                 <div class="site-logo navbar-brand"><a href="/">Janani</a></div>
                 <div class="site-socials">
                     <ul class="list-unstyled mb-0 d-flex gap-10">
@@ -37,7 +41,7 @@
                     </ul>
                 </div>
             </div>
-            <div class="header-bottom pt-3">
+            <div class="header-bottom">
                 <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white box-shadow">
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                         data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -47,19 +51,22 @@
                     <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                         <ul class="navbar-nav flex-grow-1">
                             <li class="nav-item">
-                                <a class="nav-link text-dark" href="/IncomeExpenses">Income Expenses</a>
+                                <a class="nav-link" href="/">Home</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" href="/ImageGallery">Image Gallery</a>
+                                <a class="nav-link" href="/IncomeExpenses">Income Expenses</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/ImageGallery">Image Gallery</a>
                             </li>
                         </ul>
 
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <a class="nav-link text-dark" href="/Identity/Account/Register">Register</a>
+                                <a class="nav-link" href="/Identity/Account/Register">Register</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" href="/Identity/Account/Login">Login</a>
+                                <a class="nav-link" href="/Identity/Account/Login">Login</a>
                             </li>
                         </ul>
 
@@ -71,16 +78,32 @@
     </header>
 
     <main role="main">
-        <div class="hero-section position-relative">
-            <div class="hero-img-wrap">
-                <img src="http://13.67.72.63:9012/uploads/b0c9393e-2c76-449a-a51b-6ba498b0bb66_janani-hero-img.jpg"
-                    alt="">
-            </div>
-            <div
-                class="hero-desc position-absolute top-50 start-50 translate-middle mask text-light d-flex justify-content-center flex-column text-center">
-                <h1 class="display-3">Welcome to Janani</h1>
-                <p>Embark on Your Adventure with Us! Explore the World's Wonders Awaits.</p>
-                <a class="btn btn-primary" href="#" role="button">Learn More</a>
+        <div class="hero-section">
+            <div class="hero-item-wrap">
+                <div class="hero-item position-relative">
+                    <div class="hero-img-wrap">
+                        <img src="http://13.67.72.63:9012/uploads/b0c9393e-2c76-449a-a51b-6ba498b0bb66_janani-hero-img.jpg"
+                            alt="">
+                    </div>
+                    <div
+                        class="hero-desc position-absolute top-50 start-50 translate-middle mask text-light d-flex justify-content-center flex-column text-center">
+                        <h1 class="display-3">Welcome to Janani</h1>
+                        <p>Embark on Your Adventure with Us! Explore the World's Wonders Awaits.</p>
+                        <a class="btn btn-primary" href="#" role="button">Learn More</a>
+                    </div>
+                </div>
+                <div class="hero-item position-relative">
+                    <div class="hero-img-wrap">
+                        <img src="http://13.67.72.63:9012/uploads/b0c9393e-2c76-449a-a51b-6ba498b0bb66_janani-hero-img.jpg"
+                            alt="">
+                    </div>
+                    <div
+                        class="hero-desc position-absolute top-50 start-50 translate-middle mask text-light d-flex justify-content-center flex-column text-center">
+                        <h1 class="display-3">Explore the Birth Place of Lord Buddha</h1>
+                        <p>Embark on Your Adventure with Us! Explore the World's Wonders Awaits.</p>
+                        <a class="btn btn-primary" href="#" role="button">Learn More</a>
+                    </div>
+                </div>
             </div>
         </div>
         <!-- .hero-section -->
@@ -366,6 +389,10 @@
 
     <!-- Select2 JS -->
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+    <!-- Slick JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"
+        integrity="sha512-HGOnQO9+SP1V92SrtZfjqxxtLmVzqZpjFFekvzZVWoiASSQgSr4cw9Kqd2+l8Llp4Gm0G8GIFJ4ddwZilcdb8A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <!-- Fancybox CSS and JS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css"

@@ -483,6 +483,10 @@ h6 {
   gap: 20px;
 }
 
+.navbar-expand-sm .navbar-nav .nav-link:hover {
+  color: var(--color-primary)
+}
+
 /* HERO SECTION */
 .hero-section .hero-img-wrap {
   position: relative;
@@ -499,7 +503,7 @@ h6 {
 }
 
 .hero-section .hero-img-wrap img {
-  min-height: 400px;
+  min-height: 700px;
   object-fit: cover;
   object-position: center;
 }
@@ -518,6 +522,84 @@ h6 {
 
 .hero-section .hero-desc p {
   font-size: 20px;
+}
+
+.hero-section .slick-arrow {
+  position: absolute;
+  top: 50%;
+  left: 20px;
+  transform: translateY(-50%);
+  width: 60px;
+  height: 60px;
+  border: none;
+  border-radius: 50%;
+  background-color: var(--color-primary);
+  text-align: center;
+  font-size: 0;
+  z-index: 2;
+}
+
+.hero-section .slick-arrow::before {
+  content: '';
+  font-family: "FontAwesome";
+  font-weight: 900;
+  display: inline-block;
+  font-size: 20px;
+  color: #fff;
+}
+
+.hero-section .slick-arrow.slick-prev::before {
+  content: '\f053';
+}
+
+.hero-section .slick-arrow.slick-next::before {
+  content: '\f054';
+}
+
+.hero-section .slick-arrow.slick-next {
+  right: 20px;
+  left: auto;
+}
+
+.hero-section .slick-arrow:hover {
+  background-color: #fff;
+}
+
+.hero-section .slick-arrow:hover::before {
+  color: var(--color-primary);
+}
+
+.hero-section .slick-dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 15px;
+  position: absolute;
+  bottom: 40px;
+  left: 0;
+  width: 100%;
+}
+
+.hero-section .slick-dots>li {
+  line-height: 1;
+}
+
+.hero-section .slick-dots>li button {
+  width: 15px;
+  height: 15px;
+  border: none;
+  font-size: 0;
+  background-color: #fff;
+  border-radius: 50%;
+  line-height: 1;
+}
+
+.hero-section .slick-dots>li.slick-active button,
+.hero-section .slick-dots>li:hover button {
+  background-color: var(--color-primary);
 }
 
 /* ABOUT US SECTION */
@@ -627,6 +709,13 @@ h6 {
 
 
 /* RESPONSIVE CSS */
+@media screen and (min-width: 576px) {
+  .navbar-nav {
+    margin-left: -8px;
+    margin-right: -8px;
+  }
+}
+
 @media screen and (min-width: 641px) {
   .gallery-item-wrap {
     grid-template-columns: repeat(3, 1fr);
