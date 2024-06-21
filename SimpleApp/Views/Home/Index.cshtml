@@ -1,4 +1,5 @@
-﻿@{
+﻿@model CommonModel
+@{
     ViewData["Title"] = "Home Page";
 }
 
@@ -52,8 +53,11 @@
     <!-- .about-section -->
 
     <div class="gallery-section">
-        <div class="container">
-            <h2 class="display-6 text-center fw-medium">Gallery</h2>
+
+            <div class="paging-image">
+                @Html.Partial("_ViewGallery", Model.ImageGallery)
+            </div>
+           @*  <h2 class="display-6 text-center fw-medium">Gallery</h2>
             <div class="gallery-item-wrap mt-5">
                 <div class="gallery-item">
                     <a href="http://13.67.72.63:9012/uploads/b0c9393e-2c76-449a-a51b-6ba498b0bb66_janani-hero-img.jpg"
@@ -129,14 +133,13 @@
                     </a>
                 </div>
 
-            </div>
-        </div>
+            </div> *@
     </div>
     <!-- .gallery-section -->
 
     <div class="trans-report-section">
-        <div class="container">
-            <div class=" d-flex justify-content-between mb-4">
+            @Html.Partial("_ViewInfoReport", Model.ReportModel)
+           @*  <div class=" d-flex justify-content-between mb-4">
                 <h2 class="display-6 fw-medium">Income and Expenses Report</h2>
                 <div class="date-box">Date: 2024 June</div>
             </div>
@@ -256,8 +259,7 @@
                 <div class="col-6">
                     <strong>Next Month Total = </strong><span id="overall-next-total">324812.00</span>
                 </div>
-            </div>
-        </div>
+            </div> *@
     </div>
     <!-- .trans-report-section -->
 

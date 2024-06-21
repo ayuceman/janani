@@ -11,5 +11,6 @@ namespace SimpleApp.ViewModels.IncomeExpenses
 
         [Required(ErrorMessage = "Date is required")]
         public string DateString { get; set; }
+        public bool ShowInDashBoard { get; set; }
     }
 }

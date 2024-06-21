@@ -6,6 +6,11 @@
         @Html.ValidationMessageFor(m => m.DateString, "", new { @class = "text-danger" })
     </div>
 
+<div class="form-check">
+    @Html.CheckBoxFor(m => m.ShowInDashBoard, new { @class = "form-check-input", @id = "enableShowInDashboard" })
+    @Html.LabelFor(m => m.ShowInDashBoard, "Enable to show this report in dashboard", new { @class = "form-check-label" })
+</div>
+
     <div class="form-check">
         @Html.CheckBoxFor(m => m.IsFromUpload, new { @class = "form-check-input", @id = "enableFileInput" })
         @Html.LabelFor(m => m.IsFromUpload, "Enable to upload CSV file", new { @class = "form-check-label" })
@@ -52,6 +57,7 @@
         var formData = new FormData();
         formData.append('DateString', $('#datepicker').val());
         formData.append('IsFromUpload', $('#enableFileInput').is(':checked'));
+        formData.append('ShowInDashBoard', $('#enableShowInDashboard').is(':checked'));
         formData.append('File', $('#fileInput')[0].files[0]);
 
         $.ajax({

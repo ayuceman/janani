@@ -87,8 +87,22 @@ namespace SimpleApp.Controllers
                 {
                     Date = reportDate,
                     CreatedTs = DateTime.Now,
-                    CreatedBy = User.Identity.Name
+                    CreatedBy = User.Identity.Name,
+                    ShowInDashboard=model.ShowInDashBoard
                 };
+
+                //remove showindashboard if check
+                if (model.ShowInDashBoard)
+                {
+                    var existedIncomeExpenseLog = await _context.IncomeExpensesLogs
+                        .ToListAsync();
+                    if(existedIncomeExpenseLog!=null && existedIncomeExpenseLog.Any())
+                    {
+                        existedIncomeExpenseLog.ForEach(x=>x.ShowInDashboard = false);
+                        await _context.SaveChangesAsync();
+                    }
+                }
+
                 await _context.IncomeExpensesLogs.AddAsync(logData);
                 await _context.SaveChangesAsync();
 
@@ -237,6 +251,9 @@ namespace SimpleApp.Controllers
             var result = new MainReportModel() { ReportLogId = Id };
             try
             {
+                var logDetails=await _context.IncomeExpensesLogs.FirstOrDefaultAsync(x=>x.Id == Id);
+                if (logDetails != null) result.ShowInDashboard=logDetails.ShowInDashboard;
+
                 var incomeExpenseList = await _context.IncomeExpenses
                     .Include(x => x.IncomeExpensesLog)
                     .Include(x => x.Category)
@@ -329,6 +346,24 @@ namespace SimpleApp.Controllers
                     }
 
                     if (newReportDataList.Any()) await _context.IncomeExpenses.AddRangeAsync(newReportDataList);
+
+                    //remove showindashboard if check
+                    if (model.ShowInDashboard)
+                    {
+                        var existedIncomeExpenseLog = await _context.IncomeExpensesLogs
+                            .ToListAsync();
+                        if (existedIncomeExpenseLog != null && existedIncomeExpenseLog.Any())
+                        {
+                            existedIncomeExpenseLog.ForEach(x => x.ShowInDashboard = false);
+                            await _context.SaveChangesAsync();
+                        }
+                    }
+
+                    var matchedIncomeExpenses = await _context.IncomeExpensesLogs.FirstOrDefaultAsync(x => x.Id == model.ReportLogId);
+                    if (matchedIncomeExpenses != null)
+                    {
+                        matchedIncomeExpenses.ShowInDashboard = model.ShowInDashboard;
+                    }
 
                     await _context.SaveChangesAsync();
                 }

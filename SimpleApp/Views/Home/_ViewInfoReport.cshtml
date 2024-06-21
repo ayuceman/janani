@@ -32,33 +32,6 @@
         }
     </style>
     <script>
-        function addRow(categoryElement) {
-            var tbody = categoryElement.querySelector('tbody');
-            var newRow = document.createElement('tr');
-            newRow.classList.add('data-row');
-
-            newRow.innerHTML = `
-                                        <td><input type="text" class="form-control name" value="" /></td>
-                                        <td><input type="number" class="form-control current-month" value="0" onchange="updateTotals()" /></td>
-                                        <td><input type="number" class="form-control next-month" value="0" onchange="updateTotals()" /></td>
-                                        <td>
-                                            <button type="button" onclick="addRow(this.closest('.category'))" class="btn btn-success">Add Row</button>
-                                            <button type="button" onclick="removeRow(this)" class="btn btn-danger">Remove</button>
-                                        </td>
-                                    `;
-
-            tbody.appendChild(newRow);
-            updateActionButtons(categoryElement);
-            updateTotals();
-        }
-
-        function removeRow(button) {
-            var row = button.closest('tr');
-            var categoryElement = row.closest('.category');
-            row.remove();
-            updateActionButtons(categoryElement);
-            updateTotals();
-        }
 
         function updateActionButtons(categoryElement) {
             var rows = categoryElement.querySelectorAll('tr.data-row');
@@ -67,14 +40,14 @@
                 var actionsCell = row.querySelector('td:last-child');
                 if (index === rows.length - 1) {
                     actionsCell.innerHTML = `
-                                                <button type="button" onclick="addRow(this.closest('.category'))" class="btn btn-success">Add Row</button>
-                                                <button type="button" onclick="removeRow(this)" class="btn btn-danger">Remove</button>
-                                            `;
-                } else {
-
-                        actionsCell.innerHTML = `
+                                                        <button type="button" onclick="addRow(this.closest('.category'))" class="btn btn-success">Add Row</button>
                                                         <button type="button" onclick="removeRow(this)" class="btn btn-danger">Remove</button>
                                                     `;
+                } else {
+
+                    actionsCell.innerHTML = `
+                                                                <button type="button" onclick="removeRow(this)" class="btn btn-danger">Remove</button>
+                                                            `;
 
                 }
             });
@@ -136,101 +109,18 @@
 
 
 
-
-        function saveChanges() {
-            var showInDashboard = document.getElementById('enableShowInDashboard').checked;
-            var report = {
-                ReportLogId: @Model.ReportLogId,
-                DateString: '@Model.DateString',
-                ReportList: [],
-                ShowInDashboard: showInDashboard
-            };
-
-
-            document.querySelectorAll('.category').forEach(categoryElement => {
-                var category = {
-                    Category: categoryElement.dataset.category,
-                    IncomeExpenses: []
-                };
-
-                categoryElement.querySelectorAll('tr.data-row').forEach(row => {
-                    var incomeExpense = {
-                        CategoryId: parseInt(row.dataset.categoryId || 0), // Default to 0 if not set
-                        Name: row.querySelector('.name').value,
-                        CurrentMonthAmount: parseFloat(row.querySelector('.current-month').value),
-                        NextMonthAmount: parseFloat(row.querySelector('.next-month').value)
-                    };
-
-                    category.IncomeExpenses.push(incomeExpense);
-                });
-
-                report.ReportList.push(category);
-            });
-
-            // console.log(JSON.stringify(report));
-
-            // console.log(report.ReportList);
-            // alert();
-
-            // fetch('@Url.Action("SaveReport", "IncomeExpenses")', {
-            //     method: 'POST',
-            //     headers: {
-            //         'Content-Type': 'application/json'
-            //     },
-            //     body: JSON.stringify(report)
-            // }).then(response => {
-            //     console.log(response);
-            //     if (response.success) {
-            //         alert('Report saved successfully!');
-            //     } else {
-            //         alert(response.error);
-            //     }
-            // }).catch(error => {
-            //     console.error('Error saving changes:', error);
-            //     alert('An error occurred while saving changes.');
-            // });
-
-            $.ajax({
-                url: '@Url.Action("SaveReport", "IncomeExpenses")',
-                type: 'POST',
-                contentType: 'application/json',
-                data: JSON.stringify(report),
-                success: function (response) {
-                    console.log(response);
-                    if (response.success) {
-                        alert('Report saved successfully!');
-                    } else {
-                        alert(response.errors);
-                    }
-                    location.reload();
-                },
-                error: function () {
-                    return false;
-                }
-            });
-        }
-
         document.addEventListener('DOMContentLoaded', () => {
             document.querySelectorAll('.category').forEach(updateActionButtons);
             updateTotals();
         });
 
-        function backToLog() {
-            var url = '@Url.Action("Index", "IncomeExpenses")';
-            window.location.href = url;
-        }
 
     </script>
 </head>
 <body class="container">
-    <a href="#" onclick="backToLog()">Back To Report Log</a>
     <div class="container" style="padding-bottom:10px;">
         <h2>Income and Expenses Report</h2>
         <h3>Date: @Model.DateString</h3>
-        <div class="form-check">
-            @Html.CheckBoxFor(m => m.ShowInDashboard, new { @class = "form-check-input", @id = "enableShowInDashboard" })
-            @Html.LabelFor(m => m.ShowInDashboard, "Enable to show this report in dashboard", new { @class = "form-check-label" })
-        </div>
 
         @if (!string.IsNullOrEmpty(Model.ErrorMessage))
         {
@@ -243,7 +133,6 @@
         {
             <div style="height:600px;margin-top: 50px;" class="income-expense-report">
 
-                <button style="float:right; padding:5px;margin-bottom: 10px;" onclick="saveChanges()" class="btn btn-primary">Save Changes</button>
                 @foreach (var group in Model.ReportList)
                 {
                     <h4>@group.Category</h4>
@@ -253,17 +142,17 @@
                                 <th>Name</th>
                                 <th>Current Month Amount</th>
                                 <th>Next Month Amount</th>
-                                <th>Actions</th>
+                                <th style="display:none;">>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach (var item in group.IncomeExpenses)
                             {
                                 <tr class="data-row" data-category-id="@item.CategoryId">
-                                    <td><input type="text" class="form-control name" value="@item.Name" /></td>
-                                    <td><input type="number" class="form-control current-month" value="@item.CurrentMonthAmount" onchange="updateTotals()" /></td>
-                                    <td><input type="number" class="form-control next-month" value="@item.NextMonthAmount" onchange="updateTotals()" /></td>
-                                    <td>
+                                    <td>@item.Name</td>
+                                    <td><input type="number" disabled class="form-control current-month" value="@item.CurrentMonthAmount" onchange="updateTotals()" /></td>
+                                    <td><input type="number" disabled class="form-control next-month" value="@item.NextMonthAmount" onchange="updateTotals()" /></td>
+                                    <td style="display:none;">
                                         <button type="button" onclick="removeRow(this)" class="btn btn-danger">
                                             <i class="fa fa-trash" aria-hidden="true"></i> Remove
                                         </button>
