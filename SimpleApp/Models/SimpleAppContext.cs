@@ -37,6 +37,8 @@ public partial class SimpleAppContext : DbContext
 
     public virtual DbSet<IncomeExpensesLog> IncomeExpensesLogs { get; set; }
 
+    public virtual DbSet<ReportFile> ReportFiles { get; set; }
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
         => optionsBuilder.UseSqlServer("Data Source=AITSLPT-AVISHEK;Initial Catalog=SimpleApp;Integrated Security=True;Persist Security Info=False;MultipleActiveResultSets=true;TrustServerCertificate=True;Encrypt=False");
@@ -171,7 +173,6 @@ public partial class SimpleAppContext : DbContext
             entity.Property(e => e.Name)
                 .IsRequired()
                 .HasMaxLength(200);
-            entity.Property(e => e.NextMonthAmount).HasColumnType("money");
 
             entity.HasOne(d => d.Category).WithMany(p => p.IncomeExpenses)
                 .HasForeignKey(d => d.CategoryId)
@@ -198,6 +199,20 @@ public partial class SimpleAppContext : DbContext
                 .HasColumnType("datetime")
                 .HasColumnName("CreatedTS");
             entity.Property(e => e.Date).HasColumnType("datetime");
+        });
+
+        modelBuilder.Entity<ReportFile>(entity =>
+        {
+            entity.HasNoKey();
+
+            entity.Property(e => e.FileName)
+                .IsRequired()
+                .HasMaxLength(500);
+            entity.Property(e => e.Id).ValueGeneratedOnAdd();
+            entity.Property(e => e.Name).HasMaxLength(500);
+            entity.Property(e => e.UploadedTs)
+                .HasColumnType("datetime")
+                .HasColumnName("UploadedTS");
         });
 
         OnModelCreatingPartial(modelBuilder);

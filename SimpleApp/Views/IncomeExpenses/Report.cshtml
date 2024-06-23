@@ -40,7 +40,6 @@
             newRow.innerHTML = `
                                         <td><input type="text" class="form-control name" value="" /></td>
                                         <td><input type="number" class="form-control current-month" value="0" onchange="updateTotals()" /></td>
-                                        <td><input type="number" class="form-control next-month" value="0" onchange="updateTotals()" /></td>
                                         <td>
                                             <button type="button" onclick="addRow(this.closest('.category'))" class="btn btn-success">Add Row</button>
                                             <button type="button" onclick="removeRow(this)" class="btn btn-danger">Remove</button>
@@ -83,10 +82,8 @@
         function updateTotals() {
 
             var incomeCurrentTotal = 0;
-            var incomeNextTotal = 0;
 
             var expenseCurrentTotal = 0;
-            var expenseNextTotal = 0;
 
             document.querySelectorAll('.category').forEach(categoryElement => {
                 var totalCurrentMonth = 0;
@@ -94,26 +91,20 @@
 
                 categoryElement.querySelectorAll('tr.data-row').forEach(row => {
                     var currentMonthValue = parseFloat(row.querySelector('.current-month').value) || 0;
-                    var nextMonthValue = parseFloat(row.querySelector('.next-month').value) || 0;
 
                     totalCurrentMonth += currentMonthValue;
-                    totalNextMonth += nextMonthValue;
 
                     if (categoryElement.dataset.category === "Income") {
                         incomeCurrentTotal += currentMonthValue;
-                        incomeNextTotal += nextMonthValue;
                     }
                     else {
                         expenseCurrentTotal += currentMonthValue;
-                        expenseNextTotal += nextMonthValue;
                     }
                 });
 
                 categoryElement.querySelector('.total-current-month').textContent = totalCurrentMonth.toFixed(2);
-                categoryElement.querySelector('.total-next-month').textContent = totalNextMonth.toFixed(2);
 
                 var currentTotal = (incomeCurrentTotal - expenseCurrentTotal).toFixed(2);
-                var nextTotal = (incomeNextTotal - expenseNextTotal).toFixed(2);
 
 
                 if (currentTotal < 0) {
@@ -122,14 +113,7 @@
                     $("#overall-current-total").css("color", "green");
                 }
 
-                if (nextTotal < 0) {
-                    $("#overall-next-total").css("color", "red");
-                } else {
-                    $("#overall-next-total").css("color", "green");
-                }
-
                 $("#overall-current-total").html(currentTotal);
-                $("#overall-next-total").html(nextTotal);
             });
         }
 
@@ -158,7 +142,6 @@
                         CategoryId: parseInt(row.dataset.categoryId || 0), // Default to 0 if not set
                         Name: row.querySelector('.name').value,
                         CurrentMonthAmount: parseFloat(row.querySelector('.current-month').value),
-                        NextMonthAmount: parseFloat(row.querySelector('.next-month').value)
                     };
 
                     category.IncomeExpenses.push(incomeExpense);
@@ -252,7 +235,6 @@
                             <tr>
                                 <th>Name</th>
                                 <th>Current Month Amount</th>
-                                <th>Next Month Amount</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -262,7 +244,6 @@
                                 <tr class="data-row" data-category-id="@item.CategoryId">
                                     <td><input type="text" class="form-control name" value="@item.Name" /></td>
                                     <td><input type="number" class="form-control current-month" value="@item.CurrentMonthAmount" onchange="updateTotals()" /></td>
-                                    <td><input type="number" class="form-control next-month" value="@item.NextMonthAmount" onchange="updateTotals()" /></td>
                                     <td>
                                         <button type="button" onclick="removeRow(this)" class="btn btn-danger">
                                             <i class="fa fa-trash" aria-hidden="true"></i> Remove
@@ -284,7 +265,6 @@
                                     }
                                 </td>
                                 <td class="total-current-month"></td>
-                                <td class="total-next-month"></td>
                                 <td></td>
                             </tr>
                         </tfoot>
@@ -295,9 +275,6 @@
             <div class="row" style="padding:50px;">
                 <div class="col-6">
                     <strong>Current Month Total = </strong><span id="overall-current-total"></span>
-                </div>
-                <div class="col-6">
-                    <strong>Next Month Total = </strong><span id="overall-next-total"></span>
                 </div>
             </div>
         }

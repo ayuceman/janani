@@ -12,9 +12,9 @@ namespace SimpleApp.Controllers
     [Authorize]
     public class ImageCategoryController: Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly SimpleAppContext _context;
 
-        public ImageCategoryController(ApplicationDbContext context)
+        public ImageCategoryController(SimpleAppContext context)
         {
           _context = context;
         }

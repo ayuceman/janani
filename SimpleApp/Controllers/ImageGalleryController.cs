@@ -11,10 +11,10 @@ namespace SimpleApp.Controllers
     [Authorize]
     public class ImageGalleryController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly SimpleAppContext _context;
         private readonly IWebHostEnvironment _hostingEnvironment;
 
-        public ImageGalleryController(ApplicationDbContext context, IWebHostEnvironment hostEnvironment)
+        public ImageGalleryController(SimpleAppContext context, IWebHostEnvironment hostEnvironment)
         {
             _context = context;
             _hostingEnvironment = hostEnvironment;

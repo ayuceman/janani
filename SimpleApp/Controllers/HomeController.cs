@@ -14,8 +14,8 @@ namespace SimpleApp.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly ApplicationDbContext _context;
-        public HomeController(ILogger<HomeController> logger, ApplicationDbContext context)
+        private readonly SimpleAppContext _context;
+        public HomeController(ILogger<HomeController> logger, SimpleAppContext context)
         {
             _logger = logger;
             _context = context;
@@ -73,7 +73,6 @@ namespace SimpleApp.Controllers
                             {
                                 CategoryId = x.CategoryId,
                                 CurrentMonthAmount = x.CurrentMonthAmount,
-                                NextMonthAmount = x.NextMonthAmount,
                                 Name = x.Name
                             }).ToList()
                         }).ToList();

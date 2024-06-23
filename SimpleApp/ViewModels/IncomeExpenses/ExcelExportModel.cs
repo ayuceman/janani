@@ -10,8 +10,5 @@ namespace SimpleApp.ViewModels.IncomeExpenses
 
         [ExcelColumnName("Current Month Amount")]
         public decimal? CurrentMonthAmount { get; set; }
-
-        [ExcelColumnName("Next Month Amount")]
-        public decimal? NextMonthAmount { get; set; }
     }
 }

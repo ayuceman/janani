@@ -18,8 +18,8 @@ namespace SimpleApp.Controllers
     [Authorize]
     public class IncomeExpensesController : Controller
     {
-        private readonly ApplicationDbContext _context;
-        public IncomeExpensesController(ApplicationDbContext context)
+        private readonly SimpleAppContext _context;
+        public IncomeExpensesController(SimpleAppContext context)
         {
           _context = context;
         }
@@ -116,7 +116,7 @@ namespace SimpleApp.Controllers
                         errorMessages.Add("File should not be empty when checkbox is checked");
                         return Json(new { success = false, errors = errorMessages });
                     }
-                    var types = new List<string> { "Income/Expenses", "Title", "Current Month Amount", "Next Month Amount" };
+                    var types = new List<string> { "Income/Expenses", "Title", "Current Month Amount" };
 
                     if (CsvHelpers.CheckCsvHeaders(model.File, types))
                     {
@@ -141,8 +141,7 @@ namespace SimpleApp.Controllers
                                                   CategoryId = c.Id,
                                                   Name = ie.Title,
                                                   IncomeExpensesLogId = logData.Id,
-                                                  CurrentMonthAmount = ie.CurrentMonthAmount,
-                                                  NextMonthAmount = ie.NextMonthAmount
+                                                  CurrentMonthAmount = ie.CurrentMonthAmount
                                               }).ToList();
 
                             if (reportData != null)
@@ -165,7 +164,6 @@ namespace SimpleApp.Controllers
                     {
                         CategoryId = x.Id,
                         CurrentMonthAmount = 10,
-                        NextMonthAmount = 10,
                         Name = "Sample",
                         IncomeExpensesLogId = logData.Id,
                     }).ToList();
@@ -214,8 +212,8 @@ namespace SimpleApp.Controllers
             {
                 var list = new List<ExcelExportModel>
             {
-                new ExcelExportModel(){Category="Income",Title="Salary",CurrentMonthAmount=5000,NextMonthAmount=4000},
-                new ExcelExportModel(){Category="Expenses",Title="Food",CurrentMonthAmount=3000,NextMonthAmount=5000}
+                new ExcelExportModel(){Category="Income",Title="Salary",CurrentMonthAmount=500},
+                new ExcelExportModel(){Category="Expenses",Title="Food",CurrentMonthAmount=300}
             };
 
                 var response = CsvHelpers.PrepareCSV(list);
@@ -275,7 +273,6 @@ namespace SimpleApp.Controllers
                             {
                                 CategoryId = x.CategoryId,
                                 CurrentMonthAmount = x.CurrentMonthAmount,
-                                NextMonthAmount = x.NextMonthAmount,
                                 Name = x.Name
                             }).ToList()
                         }).ToList();
@@ -337,7 +334,6 @@ namespace SimpleApp.Controllers
                                 {
                                     CategoryId = currentCategory.Id,
                                     CurrentMonthAmount = incomeExpense.CurrentMonthAmount,
-                                    NextMonthAmount = incomeExpense.NextMonthAmount,
                                     Name = incomeExpense.Name,
                                     IncomeExpensesLogId = model.ReportLogId
                                 });

@@ -22,7 +22,7 @@ namespace SimpleApp
                 .AddEntityFrameworkStores<AuthDB.ApplicationDbContext>();
             builder.Services.AddControllersWithViews();
 
-            builder.Services.AddDbContext<OtherDB.ApplicationDbContext>(options =>
+            builder.Services.AddDbContext<OtherDB.SimpleAppContext>(options =>
             options.UseSqlServer(ConnectionConstants.ConnectionStr));
             var app = builder.Build();
 
