@@ -203,12 +203,11 @@ public partial class SimpleAppContext : DbContext
 
         modelBuilder.Entity<ReportFile>(entity =>
         {
-            entity.HasNoKey();
+            entity.HasKey(e => e.Id).HasName("PK__ReportFi__3214EC07C052B561");
 
             entity.Property(e => e.FileName)
                 .IsRequired()
                 .HasMaxLength(500);
-            entity.Property(e => e.Id).ValueGeneratedOnAdd();
             entity.Property(e => e.Name).HasMaxLength(500);
             entity.Property(e => e.UploadedTs)
                 .HasColumnType("datetime")

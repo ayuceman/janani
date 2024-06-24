@@ -21,6 +21,5 @@
         public string DateString { get; set; }
         public string ErrorMessage { get; set; }
         public IEnumerable<GroupIncomExpensesModel> ReportList { get; set; }
-        public bool ShowInDashboard { get; set; }
     }
 }

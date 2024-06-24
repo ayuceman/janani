@@ -1,0 +1,142 @@
+﻿@model PaginatedList<ReportFileViewModel>
+
+<h3>Reports</h3>
+
+<div style="float:right;">
+    <button type="button" onclick="newFile()" class="btn btn-primary">
+        <i class="fa fa-plus" aria-hidden="true"></i>
+        Add New
+    </button>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Report Name</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Items)
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td>
+                    <button type="button" class="btn btn-danger" onclick="deleteFile(@item.Id)">
+                        <i class="fa fa-trash" aria-hidden="true"></i>
+                    </button>
+                    <button type="button" class="btn btn-danger" onclick="downloadPdf(@item.Id)">
+                        <i class="fa fa-download" aria-hidden="true"></i>
+                    </button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div class="modal fade" id="newReportModal" tabindex="-1" role="dialog" aria-labelledby="newReportLabelModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="newReportLabelModal">Upload Pdf Reports</h5>
+                <button type="button" class="close" data-dismiss="modal" onclick="closeModal()" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div>
+    @if (Model.HasPreviousPage)
+    {
+        @Html.ActionLink(
+                "Previous",
+                "Index",
+                new { page = Model.PageIndex - 1 },
+                new { @class = "btn btn-primary", style = "margin: 5px;" }
+                )
+
+    }
+    @if (Model.HasNextPage)
+    {
+        @Html.ActionLink(
+                "Next",
+                "Index",
+                new { page = Model.PageIndex + 1 },
+                new { @class = "btn btn-primary", style = "margin: 5px;" }
+                )
+
+    }
+</div>
+
+<script>
+    function newFile() {
+        var modal = $('#newReportModal');
+        $.ajax({
+            url: '@Url.Action("UploadFile", "PdfReport")',
+            type: 'GET',
+            success: function (data) {
+                modal.find('.modal-body').html(data);
+                modal.modal('show');
+            }
+        });
+    }
+    function closeModal() {
+        var modal = $('#newReportModal');
+        console.log(modal);
+        modal.modal('hide');
+    }
+
+
+    function deleteFile(id) {
+        var isconfirm = confirm("Are you sure, you want to remove this report?");
+        if (isconfirm) {
+            $.ajax({
+                url: '@Url.Action("DeleteFile", "PdfReport")',
+                type: 'POST',
+                data: { id: id }, // Data to send to the server
+                success: function (response) {
+                    var url = '@Url.Action("Index", "PdfReport")';
+                    window.location.href = url;
+                },
+                error: function (xhr, status, error) {
+                    console.error('Error deleting report:', error);
+                    // Handle AJAX error (optional)
+                }
+            });
+        }
+        else return false;
+    }
+
+    function downloadPdf(reportId) {
+        var url = '@Url.Action("DownloadPdf", "PdfReport")' + '?id=' + reportId;
+
+        fetch(url, {
+            method: 'GET'
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok.');
+                }
+                return response.blob();
+            })
+            .then(blob => {
+                var downloadUrl = window.URL.createObjectURL(blob);
+                var a = document.createElement('a');
+                a.href = downloadUrl;
+                a.download = 'report.pdf'; // You can dynamically set the file name here
+                document.body.appendChild(a);
+                a.click();
+                a.remove();
+                window.URL.revokeObjectURL(downloadUrl);
+            })
+            .catch(error => {
+                console.error('There was a problem with the fetch operation:', error);
+            });
+    }
+
+</script>

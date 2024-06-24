@@ -48,7 +48,7 @@ namespace SimpleApp.Controllers
             #region Income Expenses
 
             
-            var logDetails = await _context.IncomeExpensesLogs.FirstOrDefaultAsync(x => x.ShowInDashboard);
+            var logDetails = await _context.IncomeExpensesLogs.FirstOrDefaultAsync();
 
             if(logDetails != null)
             {

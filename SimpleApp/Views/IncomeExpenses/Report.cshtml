@@ -122,12 +122,10 @@
 
 
         function saveChanges() {
-            var showInDashboard = document.getElementById('enableShowInDashboard').checked;
             var report = {
                 ReportLogId: @Model.ReportLogId,
                 DateString: '@Model.DateString',
-                ReportList: [],
-                ShowInDashboard: showInDashboard
+                ReportList: []
             };
 
 
@@ -210,10 +208,6 @@
     <div class="container" style="padding-bottom:10px;">
         <h2>Income and Expenses Report</h2>
         <h3>Date: @Model.DateString</h3>
-        <div class="form-check">
-            @Html.CheckBoxFor(m => m.ShowInDashboard, new { @class = "form-check-input", @id = "enableShowInDashboard" })
-            @Html.LabelFor(m => m.ShowInDashboard, "Enable to show this report in dashboard", new { @class = "form-check-label" })
-        </div>
 
         @if (!string.IsNullOrEmpty(Model.ErrorMessage))
         {

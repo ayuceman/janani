@@ -1,47 +1,37 @@
-﻿@model ImageUploadViewModel
+﻿@model ReportUploadViewModel
 
 <span style="color:red;" id="createError"></span>
 <div class="form-group">
-    @Html.LabelFor(m => m.ImageCategoryId, "Category")
-    @Html.DropDownListFor(m => m.ImageCategoryId, (SelectList)ViewBag.CategoryList, "-- Select category --", new { @class = "form-control" })
-    @Html.ValidationMessageFor(m => m.ImageCategoryId, "", new { @class = "text-danger" })
-</div>
-
-<div class="form-group">
-    <label for="imageUpload">Upload Images (Max 10)</label>
-    <input type="file" id="imageUpload" name="imageUpload" accept="image/*" multiple>
-    <div id="imagePreview" class="mt-2 row"></div>
-</div>
-
-<div id="altTextFields" class="form-group">
-    <!-- Alternate text fields will be dynamically added here -->
+    <label for="pdfUpload">Upload PDFs (Max 10)</label>
+    <input type="file" id="pdfUpload" name="pdfUpload" accept="application/pdf" multiple>
+    <div id="pdfPreview" class="mt-2 row"></div>
 </div>
 
 <div class="modal-footer">
-    <button id="submitBtn" type="submit" class="btn btn-primary">Create</button>
+    <button id="submitBtn" type="submit" class="btn btn-primary">Upload</button>
     <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="closeModal()">Close</button>
 </div>
 
 <script>
-    // Function to handle image preview and remove
-    function previewImages(input) {
-        $('#imagePreview').empty(); // Clear previous previews
+    // Function to handle PDF preview and remove
+    function previewPdfs(input) {
+        $('#pdfPreview').empty(); // Clear previous previews
         var files = input.files;
         if (files.length > 10) {
-            alert("Please select a maximum of 10 images.");
+            alert("Please select a maximum of 10 PDFs.");
             return;
         }
         for (var i = 0; i < files.length; i++) {
             (function (file, index) {
                 var reader = new FileReader();
                 reader.onload = function (e) {
-                    $('#imagePreview').append(
+                    $('#pdfPreview').append(
                         '<div class="col-md-4 mb-4">' +
                         '<div class="card">' +
-                        '<img src="' + e.target.result + '" class="card-img-top" style="max-height: 150px; object-fit: cover;" alt="Image Preview">' +
+                        '<embed src="' + e.target.result + '" class="card-img-top" type="application/pdf" style="max-height: 150px; object-fit: cover;" />' +
                         '<div class="card-body">' +
-                        '<input type="text" class="form-control mt-2" placeholder="Alternative Text" name="altText' + index + '">' +
-                        '<button type="button" style="margin-top: 5px; float: right;" class="btn btn-sm btn-danger delete-image" onclick="removeImage(this)">Remove</button>' +
+                        '<input type="text" class="form-control mt-2" placeholder="Title" name="title' + index + '">' +
+                        '<button type="button" style="margin-top: 5px; float: right;" class="btn btn-sm btn-danger delete-pdf" onclick="removePdf(this)">Remove</button>' +
                         '</div>' +
                         '</div>' +
                         '</div>'
@@ -52,45 +42,42 @@
         }
     }
 
-    // Function to remove image preview
-    function removeImage(button) {
+    // Function to remove PDF preview
+    function removePdf(button) {
         $(button).closest('.col-md-4').remove(); // Corrected selector to remove parent .col-md-4
     }
 
-    // Trigger image preview when files selected
-    $('#imageUpload').change(function () {
-        previewImages(this);
+    // Trigger PDF preview when files selected
+    $('#pdfUpload').change(function () {
+        previewPdfs(this);
     });
 
     $('#submitBtn').click(function (event) {
         event.preventDefault();
         var formData = new FormData();
-        var categoryId = $('#ImageCategoryId').val();
-        formData.append('ImageCategoryId', categoryId);
-
-        var files = $('#imageUpload')[0].files;
+        var files = $('#pdfUpload')[0].files;
         if (files.length > 10) {
-            alert("Please select a maximum of 10 images.");
+            alert("Please select a maximum of 10 PDFs.");
             return;
         }
 
         for (var i = 0; i < files.length; i++) {
             formData.append('Files[' + i + '].File', files[i]);
-            formData.append('Files[' + i + '].AlternativeText', $('input[name="altText' + i + '"]').val());
+            formData.append('Files[' + i + '].Name', $('input[name="title' + i + '"]').val());
         }
 
         $.ajax({
-            url: '@Url.Action("UploadImage", "ImageGallery")',
+            url: '@Url.Action("UploadFile", "PdfReport")',
             type: 'POST',
             data: formData,
             contentType: false,
             processData: false,
             success: function (response) {
                 if (response.success) {
-                    var url = '@Url.Action("ImageDetailsList", "ImageGallery")';
+                    var url = '@Url.Action("Index", "PdfReport")';
                     window.location.href = url;
                 } else {
-                   alert(response.errors);
+                    alert(response.errors);
                 }
             },
             error: function () {

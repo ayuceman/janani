@@ -25,7 +25,7 @@ namespace SimpleApp.Controllers
             int pageSize = 12;
 
             var fileList = _context.ReportFiles
-                .Select(x => new ReportViewModel()
+                .Select(x => new ReportFileViewModel()
                 {
                     Id = x.Id,
                     FileName = x.FileName,
@@ -34,7 +34,7 @@ namespace SimpleApp.Controllers
                     FilePath = Path.Combine("/reports", x.FileName),
                 }).OrderByDescending(x => x.Id).AsQueryable();
 
-            var paginatedList = PaginatedList<ReportViewModel>.Create(fileList, model.Page, pageSize);
+            var paginatedList = PaginatedList<ReportFileViewModel>.Create(fileList, model.Page, pageSize);
 
             return View(paginatedList);
         }
@@ -46,7 +46,7 @@ namespace SimpleApp.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> UploadImage(ReportUploadViewModel model)
+        public async Task<ActionResult> UploadFile(ReportUploadViewModel model)
         {
             var _trans = await _context.Database.BeginTransactionAsync();
             try
@@ -103,7 +103,7 @@ namespace SimpleApp.Controllers
                     success = true
                 });
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 await _trans.RollbackAsync();
                 return Json(new { success = false, errors = "Internal Server Error" });
@@ -130,6 +130,37 @@ namespace SimpleApp.Controllers
                 await _context.SaveChangesAsync();
             }
             return Ok();
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> DownloadPdf(int id)
+        {
+            var report = await _context.ReportFiles.FirstOrDefaultAsync(x=>x.Id==id);
+            if (report == null)
+            {
+                return NotFound();
+            }
+
+            string uploadsFolder = Path.Combine(_hostingEnvironment.WebRootPath, "reports");
+
+            string filePath = Path.Combine(uploadsFolder, report.FileName);
+
+            if (string.IsNullOrEmpty(filePath) || !System.IO.File.Exists(filePath))
+            {
+                return NotFound();
+            }
+
+            var memory = new MemoryStream();
+            using (var stream = new FileStream(filePath, FileMode.Open))
+            {
+                await stream.CopyToAsync(memory);
+            }
+            memory.Position = 0;
+            var contentType = "application/pdf";
+            var fileName = Path.GetFileName(filePath);
+
+            return File(memory, contentType, fileName);
         }
 
     }

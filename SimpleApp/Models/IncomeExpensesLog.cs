@@ -15,7 +15,5 @@ public partial class IncomeExpensesLog
 
     public bool IsDeleted { get; set; }
 
-    public bool ShowInDashboard { get; set; }
-
     public virtual ICollection<IncomeExpense> IncomeExpenses { get; set; } = new List<IncomeExpense>();
 }
