@@ -527,7 +527,8 @@ nav.navbar-light .navbar-nav .nav-link:hover {
   background-color: rgba(0, 0, 0, 0.5);
 }
 
-.hero-section .hero-img-wrap img {
+.hero-section .hero-img-wrap img,
+.hero-section .hero-img-wrap iframe {
   min-height: 700px;
   object-fit: cover;
   object-position: center;
