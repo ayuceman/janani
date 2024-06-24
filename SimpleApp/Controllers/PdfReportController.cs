@@ -163,6 +163,22 @@ namespace SimpleApp.Controllers
             return File(memory, contentType, fileName);
         }
 
+
+        [AllowAnonymous]
+        public async Task<IActionResult> ReportList()
+        {
+            var fileList =await _context.ReportFiles
+                .Select(x => new ReportFileViewModel()
+                {
+                    Id = x.Id,
+                    FileName = x.FileName,
+                    Name = x.Name,
+                    UploadedTs = x.UploadedTs,
+                    FilePath = Path.Combine("/reports", x.FileName),
+                }).OrderByDescending(x => x.Id).ToListAsync();
+
+            return Json(fileList);
+        }
     }
 }
 

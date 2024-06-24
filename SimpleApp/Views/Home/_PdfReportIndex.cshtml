@@ -1,0 +1,64 @@
+﻿
+<h3>Reports</h3>
+
+<table id="reportsTable" class="display">
+    <thead>
+        <tr>
+            <th>Report Name</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Data will be populated by DataTable -->
+    </tbody>
+</table>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#reportsTable').DataTable({
+            "ajax": {
+                "url": "@Url.Action("ReportList", "PdfReport")",
+                "type": "GET",
+                "dataSrc": ""
+            },
+            "columns": [
+                { "data": "name" },
+                {
+                    "data": "id",
+                    "render": function (data, type, row) {
+                        return `<button type="button" class="btn btn-danger" onclick="downloadPdf(${data})">
+                                        <i class="fa fa-download" aria-hidden="true"></i>
+                                    </button>`;
+                    }
+                }
+            ]
+        });
+    });
+
+    function downloadPdf(reportId) {
+        var url = '@Url.Action("DownloadPdf", "PdfReport")' + '?id=' + reportId;
+
+        fetch(url, {
+            method: 'GET'
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok.');
+                }
+                return response.blob();
+            })
+            .then(blob => {
+                var downloadUrl = window.URL.createObjectURL(blob);
+                var a = document.createElement('a');
+                a.href = downloadUrl;
+                a.download = 'report.pdf'; // You can dynamically set the file name here
+                document.body.appendChild(a);
+                a.click();
+                a.remove();
+                window.URL.revokeObjectURL(downloadUrl);
+            })
+            .catch(error => {
+                console.error('There was a problem with the fetch operation:', error);
+            });
+    }
+</script>

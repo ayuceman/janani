@@ -9,6 +9,7 @@
         public string Category { get; set; }
         public int CategoryId {  get; set; }
         public IEnumerable<IncomeExpenseModel> IncomeExpenses { get; set; }
+        public decimal? Total { get; set; }
     }
 
     public record MainReportModel
@@ -21,5 +22,6 @@
         public string DateString { get; set; }
         public string ErrorMessage { get; set; }
         public IEnumerable<GroupIncomExpensesModel> ReportList { get; set; }
+        public decimal? Total { get; set; }
     }
 }

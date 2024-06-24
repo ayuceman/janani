@@ -45,6 +45,22 @@ namespace SimpleApp.Controllers
             return View(paginatedList);
         }
 
+        [AllowAnonymous]
+        public async Task<ActionResult> IncomeExpensesList()
+        {
+            var reportLogs =await _context.IncomeExpensesLogs.Where(x => !x.IsDeleted)
+                .Select(x => new LogViewModel()
+                {
+                    Id = x.Id,
+                    CreatedBy = x.CreatedBy,
+                    DateInString = x.Date.ToString("yyyy MMMM"),
+                    CreatedTs = x.CreatedTs.ToString("MM/dd/yyyy h:mm tt"),
+                    Date = x.Date
+                }).OrderByDescending(x => x.Date).ToListAsync();
+
+            return Json(reportLogs);
+        }
+
         /// <summary>
         /// Modal pop
         /// </summary>

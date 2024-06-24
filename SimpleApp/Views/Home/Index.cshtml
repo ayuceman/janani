@@ -141,7 +141,7 @@
     <!-- .gallery-section -->
 
     <div class="trans-report-section">
-            @Html.Partial("_ViewInfoReport", Model.ReportModel)
+        @Html.Partial("_IncomeExpensesList")
            @*  <div class=" d-flex justify-content-between mb-4">
                 <h2 class="display-6 fw-medium">Income and Expenses Report</h2>
                 <div class="date-box">Date: 2024 June</div>
@@ -265,6 +265,10 @@
             </div> *@
     </div>
     <!-- .trans-report-section -->
+
+    <div class="pdf-files">
+        @Html.Partial("_PdfReportIndex")
+    </div>
 
     <div class="contact-section">
         <div class="container">

@@ -24,6 +24,8 @@
         integrity="sha512-yHknP1/AwR+yx26cB1y0cjvQUMvEa2PFzt1c9LlS4pRQ5NOTZFWbhBig+X9G9eYW/8m0/4OXNx8pxJ6z57x0dw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css" />
 </head>
 <body>
     <header class="border-bottom">
@@ -56,8 +58,11 @@
                                  <li class="nav-item">
                                 <a class="nav-link" asp-area="" asp-controller="IncomeExpenses" asp-action="Index">Income Expenses</a>
                             </li>
-                            <li class="nav-item">
+                               <li class="nav-item">
                                 <a class="nav-link" asp-area="" asp-controller="ImageGallery" asp-action="Index">Image Gallery</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-controller="PdfReport" asp-action="Index">Report Files</a>
                             </li>
                             }
                            
@@ -134,6 +139,8 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    
+<script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
 <style>
     @await RenderSectionAsync("Scripts", required: false)
 </body>

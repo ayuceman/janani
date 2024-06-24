@@ -1,9 +1,6 @@
 ﻿@model MainReportModel
 
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Income/Expenses Report</title>
+
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
     <style>
@@ -31,83 +28,7 @@
             overflow: scroll;
         }
     </style>
-    <script>
 
-        function updateActionButtons(categoryElement) {
-            var rows = categoryElement.querySelectorAll('tr.data-row');
-            rows.forEach((row, index) => {
-                console.log(row);
-                var actionsCell = row.querySelector('td:last-child');
-                if (index === rows.length - 1) {
-                    actionsCell.innerHTML = `
-                                                        <button type="button" onclick="addRow(this.closest('.category'))" class="btn btn-success">Add Row</button>
-                                                        <button type="button" onclick="removeRow(this)" class="btn btn-danger">Remove</button>
-                                                    `;
-                } else {
-
-                    actionsCell.innerHTML = `
-                                                                <button type="button" onclick="removeRow(this)" class="btn btn-danger">Remove</button>
-                                                            `;
-
-                }
-            });
-        }
-
-        function updateTotals() {
-
-            var incomeCurrentTotal = 0;
-
-            var expenseCurrentTotal = 0;
-
-            document.querySelectorAll('.category').forEach(categoryElement => {
-                var totalCurrentMonth = 0;
-                var totalNextMonth = 0;
-
-                categoryElement.querySelectorAll('tr.data-row').forEach(row => {
-                    var currentMonthValue = parseFloat(row.querySelector('.current-month').value) || 0;
-
-                    totalCurrentMonth += currentMonthValue;
-                    totalNextMonth += nextMonthValue;
-
-                    if (categoryElement.dataset.category === "Income") {
-                        incomeCurrentTotal += currentMonthValue;
-                        incomeNextTotal += nextMonthValue;
-                    }
-                    else {
-                        expenseCurrentTotal += currentMonthValue;
-                        expenseNextTotal += nextMonthValue;
-                    }
-                });
-
-                categoryElement.querySelector('.total-current-month').textContent = totalCurrentMonth.toFixed(2);
-
-                var currentTotal = (incomeCurrentTotal - expenseCurrentTotal).toFixed(2);
-                var nextTotal = (incomeNextTotal - expenseNextTotal).toFixed(2);
-
-
-                if (currentTotal < 0) {
-                    $("#overall-current-total").css("color", "red");
-                } else {
-                    $("#overall-current-total").css("color", "green");
-                }
-
-
-                $("#overall-current-total").html(currentTotal);
-            });
-        }
-
-
-
-
-        document.addEventListener('DOMContentLoaded', () => {
-            document.querySelectorAll('.category').forEach(updateActionButtons);
-            updateTotals();
-        });
-
-
-    </script>
-</head>
-<body class="container">
     <div class="container" style="padding-bottom:10px;">
         <h2>Income and Expenses Report</h2>
         <h3>Date: @Model.DateString</h3>
@@ -130,8 +51,7 @@
                         <thead class="thead-light">
                             <tr>
                                 <th>Name</th>
-                                <th>Current Month Amount</th>
-                                <th style="display:none;">>Actions</th>
+                                <th>Amount</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -140,11 +60,6 @@
                                 <tr class="data-row" data-category-id="@item.CategoryId">
                                     <td>@item.Name</td>
                                     <td><input type="number" disabled class="form-control current-month" value="@item.CurrentMonthAmount" onchange="updateTotals()" /></td>
-                                    <td style="display:none;">
-                                        <button type="button" onclick="removeRow(this)" class="btn btn-danger">
-                                            <i class="fa fa-trash" aria-hidden="true"></i> Remove
-                                        </button>
-                                    </td>
                                 </tr>
                             }
                         </tbody>
@@ -160,8 +75,7 @@
                                         <strong>Expenses Total</strong>
                                     }
                                 </td>
-                                <td class="total-current-month"></td>
-                                <td></td>
+                            <td>@group.Total</td>
                             </tr>
                         </tfoot>
                     </table>
@@ -170,7 +84,7 @@
 
             <div class="row" style="padding:50px;">
                 <div class="col-6">
-                    <strong>Current Month Total = </strong><span id="overall-current-total"></span>
+                    <strong>Total = </strong><span>@Model.Total</span>
                 </div>
             </div>
         }
@@ -179,5 +93,3 @@
             <p>No data available.</p>
         }
     </div>
-</body>
-</html>

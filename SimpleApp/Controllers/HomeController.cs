@@ -1,4 +1,5 @@
 using DocumentFormat.OpenXml.Office2010.Excel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -105,5 +106,63 @@ namespace SimpleApp.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+        public async Task<ActionResult> ViewReportById(int Id)
+        {
+            var result = new MainReportModel() { ReportLogId = Id };
+            try
+            {
+                var incomeExpenseList = await _context.IncomeExpenses
+                    .Include(x => x.IncomeExpensesLog)
+                    .Include(x => x.Category)
+                    .Where(x => x.IncomeExpensesLogId == Id && !x.IncomeExpensesLog.IsDeleted)
+                    .ToListAsync();
+
+                if (incomeExpenseList != null && incomeExpenseList.Any())
+                {
+                    var date = incomeExpenseList.FirstOrDefault()?.IncomeExpensesLog.Date;
+
+                    result.DateString = date?.ToString("yyyy MMMM");
+
+                    var groupedList = incomeExpenseList.GroupBy(x => new { x.Category.Name, x.Category.Id })
+                        .Select(x => new GroupIncomExpensesModel()
+                        {
+                            Category = x.Key.Name,
+                            CategoryId = x.Key.Id,
+                            IncomeExpenses = x.Select(x => new IncomeExpenseModel()
+                            {
+                                CategoryId = x.CategoryId,
+                                CurrentMonthAmount = x.CurrentMonthAmount,
+                                Name = x.Name
+                            }).ToList()
+                            ,Total=x.Sum(y=>y.CurrentMonthAmount)
+                        }).ToList();
+
+                    if (groupedList != null && groupedList.Any())
+                    {
+                        decimal? Total = 0;
+
+                        foreach (var group in groupedList)
+                        {
+                            if(group.Category=="Income") Total = group.Total;
+                            else Total-=group.Total;
+                        }
+                        result.ReportList = groupedList;
+                        result.Total = Total;
+                    }
+
+                }
+                else
+                {
+                    result.ErrorMessage = "Data is empty";
+                }
+            }
+            catch (Exception ex)
+            {
+                result.ErrorMessage = $"Error:{ex.Message}";
+            }
+            return PartialView("_ViewInfoReport", result);
+        }
+
     }
 }
