@@ -1,82 +1,87 @@
 ﻿@model PaginatedList<ImageCategoryModel>
 
-<a href="#" onclick="backToGallery()">Back To Image Settings</a>
 
-<h3>Image Category</h3>
+<div class="img-cat-content-wrapper">
+    <div class="container">
+        <a href="#" onclick="backToGallery()"><i class="fa-solid fa-angle-left"></i>Back To Image Settings</a>
 
-<div style="float:right;">
-    <button type="button" onclick="newCategory()" class="btn btn-primary">
-        <i class="fa fa-plus" aria-hidden="true"></i>
-        Add New
-    </button>
-</div>
+        <h3 class="mt-4">Image Category</h3>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>Category</th>
-            <th>Description</th>
-            <th>Created By</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.Items)
-        {
-            <tr>
-                <td>@item.Name</td>
-                <td>@item.Description</td>
-                <td>@item.CreatedBy</td>
-                <td>
-                    <button type="button" class="btn btn-success" onclick="editCategory(@item.Id)">
-                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                    </button>
-                    <button type="button" class="btn btn-danger" onclick="deleteCategory(@item.Id)">
-                        <i class="fa fa-trash" aria-hidden="true"></i>
-                    </button>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+        <div class="img-cat-btn-wrap mb-4">
+            <button type="button" onclick="newCategory()" class="btn btn-primary">
+                <i class="fa fa-plus" aria-hidden="true"></i>
+                Add New
+            </button>
+        </div>
 
-<div class="modal fade" id="newReportModal" tabindex="-1" role="dialog" aria-labelledby="newReportLabelModal" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="newReportLabelModal">Category Info</h5>
-                <button type="button" class="close" data-dismiss="modal" onclick="closeModal()" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Category</th>
+                    <th>Description</th>
+                    <th>Created By</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Items)
+                {
+                    <tr>
+                        <td>@item.Name</td>
+                        <td>@item.Description</td>
+                        <td>@item.CreatedBy</td>
+                        <td class="table-btn-wrap">
+                            <button type="button" class="btn btn-success" onclick="editCategory(@item.Id)">
+                                <i class="fa-solid fa-pen-to-square" aria-hidden="true"></i>
+                            </button>
+                            <button type="button" class="btn btn-danger" onclick="deleteCategory(@item.Id)">
+                                <i class="fa fa-trash" aria-hidden="true"></i>
+                            </button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <div class="modal fade" id="newReportModal" tabindex="-1" role="dialog" aria-labelledby="newReportLabelModal" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="newReportLabelModal">Category Info</h5>
+                        <button type="button" class="close" data-dismiss="modal" onclick="closeModal()" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                    </div>
+
+                </div>
             </div>
-            <div class="modal-body">
-            </div>
+        </div>
 
+        <div>
+            @if (Model.HasPreviousPage)
+            {
+                @Html.ActionLink(
+                        "Previous",
+                        "Index",
+                        new { page = Model.PageIndex - 1 },
+                        new { @class = "btn btn-primary", style = "margin: 5px;" }
+                        )
+
+            }
+            @if (Model.HasNextPage)
+            {
+                @Html.ActionLink(
+                        "Next",
+                        "Index",
+                        new { page = Model.PageIndex + 1 },
+                        new { @class = "btn btn-primary", style = "margin: 5px;" }
+                        )
+
+            }
         </div>
     </div>
-</div>
-
-<div>
-    @if (Model.HasPreviousPage)
-    {
-        @Html.ActionLink(
-                "Previous",
-                "Index",
-                new { page = Model.PageIndex - 1 },
-                new { @class = "btn btn-primary", style = "margin: 5px;" }
-                )
-
-    }
-    @if (Model.HasNextPage)
-    {
-        @Html.ActionLink(
-                "Next",
-                "Index",
-                new { page = Model.PageIndex + 1 },
-                new { @class = "btn btn-primary", style = "margin: 5px;" }
-                )
-
-    }
 </div>
 
 <script>
