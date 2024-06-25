@@ -1,88 +1,88 @@
 ﻿@model PaginatedList<ImageDetailsViewModel>
 
-<div class="container">
-    <a href="#" onclick="backToImageGallery()">Back To Image Gallery</a>
+<div class="img-details-list-detail-page pt-5 pb-5">
+    <div class="container">
+        <a href="#" onclick="backToImageGallery()" class="back-btn"><i class="fa-solid fa-angle-left"></i> Back To Image Gallery</a>
 
-    <h3>Image Settings</h3>
+        <h3>Image Settings</h3>
 
-    <div style="float:right;padding:5px;flex:none;">
-        <button type="button" onclick="uploadImage()" class="btn btn-primary">
-            <i class="fa fa-plus" aria-hidden="true"></i>
-            Upload Image
-        </button>
-        <button type="button" onclick="imageCategory()" class="btn btn-primary">
-            Categories
-        </button>
-    </div>
+        <div class="img-settings-btn-wrap d-flex justify-content-end">
+            <button type="button" onclick="uploadImage()" class="btn btn-primary">
+                <i class="fa fa-plus" aria-hidden="true"></i>
+                Upload Image
+            </button>
+            <button type="button" onclick="imageCategory()" class="btn btn-primary">
+                Categories
+            </button>
+        </div>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Image</th>
-                <th>Category</th>
-                <th>Alternative Text</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model.Items)
-            {
+        <table class="table">
+            <thead>
                 <tr>
-                    <td>
-                        <img src="@item.ImagePath" alt="@item.AlternativeText" class="img-thumbnail" style="max-height: 100px;" />
-                    </td>
-                    <td>@item.ImageCategory</td>
-                    <td>@item.AlternativeText</td>
-                    <td>
-                        <button type="button" class="btn btn-danger" onclick="deleteImage(@item.Id)">
-                            <i class="fa fa-trash" aria-hidden="true"></i>
-                        </button>
-                    </td>
+                    <th>Image</th>
+                    <th>Category</th>
+                    <th>Alternative Text</th>
+                    <th>Actions</th>
                 </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Items)
+                {
+                    <tr>
+                        <td>
+                            <img src="@item.ImagePath" alt="@item.AlternativeText" class="img-thumbnail" style="max-height: 100px;" />
+                        </td>
+                        <td>@item.ImageCategory</td>
+                        <td>@item.AlternativeText</td>
+                        <td>
+                            <button type="button" class="btn btn-danger" onclick="deleteImage(@item.Id)">
+                                <i class="fa fa-trash" aria-hidden="true"></i>
+                            </button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <div>
+            @if (Model.HasPreviousPage)
+            {
+                @Html.ActionLink(
+                        "Previous",
+                        "ImageDetailsList",
+                        new { page = Model.PageIndex - 1 },
+                        new { @class = "btn btn-primary", style = "margin: 5px;" }
+                        )
+
             }
-        </tbody>
-    </table>
+            @if (Model.HasNextPage)
+            {
+                @Html.ActionLink(
+                        "Next",
+                        "ImageDetailsList",
+                        new { page = Model.PageIndex + 1 },
+                        new { @class = "btn btn-primary", style = "margin: 5px;" }
+                        )
 
+            }
+        </div>
 
-    <div>
-        @if (Model.HasPreviousPage)
-        {
-            @Html.ActionLink(
-                     "Previous",
-                     "ImageDetailsList",
-                     new { page = Model.PageIndex - 1 },
-                     new { @class = "btn btn-primary", style = "margin: 5px;" }
-                     )
+        <div class="modal fade bd-example-modal-lg" id="newReportModal" tabindex="-1" role="dialog" aria-labelledby="newReportLabelModal" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="newReportLabelModal">Upload Images</h5>
+                        <button type="button" class="close" data-dismiss="modal" onclick="closeModal()" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                    </div>
 
-        }
-        @if (Model.HasNextPage)
-        {
-            @Html.ActionLink(
-                     "Next",
-                     "ImageDetailsList",
-                     new { page = Model.PageIndex + 1 },
-                     new { @class = "btn btn-primary", style = "margin: 5px;" }
-                     )
-
-        }
-    </div>
-
-    <div class="modal fade bd-example-modal-lg" id="newReportModal" tabindex="-1" role="dialog" aria-labelledby="newReportLabelModal" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="newReportLabelModal">Upload Images</h5>
-                    <button type="button" class="close" data-dismiss="modal" onclick="closeModal()" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
                 </div>
-                <div class="modal-body">
-                </div>
-
             </div>
         </div>
     </div>
-
 </div>
 
 <script>

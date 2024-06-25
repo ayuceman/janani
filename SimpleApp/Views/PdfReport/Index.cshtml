@@ -1,52 +1,54 @@
 ﻿@model PaginatedList<ReportFileViewModel>
 
-<h3>Reports</h3>
+<div class="pdf-reports-detail-page pt-5 pb-5">
+    <div class="container">
+        <div class="d-flex justify-content-between heading-row">
+            <h3>Reports</h3>
+            <button type="button" onclick="newFile()" class="btn btn-primary">
+                <i class="fa fa-plus" aria-hidden="true"></i>
+                Add New
+            </button>
+        </div>
 
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Report Name</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Items)
+                {
+                    <tr>
+                        <td>@item.Name</td>
+                        <td>
+                            <button type="button" class="btn btn-danger" onclick="deleteFile(@item.Id)">
+                                <i class="fa fa-trash" aria-hidden="true"></i>
+                            </button>
+                            <button type="button" class="btn btn-danger" onclick="downloadPdf(@item.Id)">
+                                <i class="fa fa-download" aria-hidden="true"></i>
+                            </button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
 
-<div class="container pt-5 pb-5">
-    <button type="button" onclick="newFile()" class="btn btn-primary">
-        <i class="fa fa-plus" aria-hidden="true"></i>
-        Add New
-    </button>
-</div>
+        <div class="modal fade" id="newReportModal" tabindex="-1" role="dialog" aria-labelledby="newReportLabelModal" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="newReportLabelModal">Upload Pdf Reports</h5>
+                        <button type="button" class="close" data-dismiss="modal" onclick="closeModal()" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                    </div>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>Report Name</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.Items)
-        {
-            <tr>
-                <td>@item.Name</td>
-                <td>
-                    <button type="button" class="btn btn-danger" onclick="deleteFile(@item.Id)">
-                        <i class="fa fa-trash" aria-hidden="true"></i>
-                    </button>
-                    <button type="button" class="btn btn-danger" onclick="downloadPdf(@item.Id)">
-                        <i class="fa fa-download" aria-hidden="true"></i>
-                    </button>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
-
-<div class="modal fade" id="newReportModal" tabindex="-1" role="dialog" aria-labelledby="newReportLabelModal" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="newReportLabelModal">Upload Pdf Reports</h5>
-                <button type="button" class="close" data-dismiss="modal" onclick="closeModal()" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+                </div>
             </div>
-            <div class="modal-body">
-            </div>
-
         </div>
     </div>
 </div>

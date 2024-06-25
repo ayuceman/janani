@@ -446,8 +446,6 @@ h6 {
   border: none;
   padding: 12px 30px;
   max-width: 300px;
-  margin-left: auto;
-  margin-right: auto;
   line-height: 1;
 }
 
@@ -542,6 +540,12 @@ nav.navbar-light .navbar-nav .nav-link:hover {
   font-size: 20px;
 }
 
+.hero-section .hero-desc .btn {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 1rem;
+}
+
 .hero-section .slick-arrow {
   position: absolute;
   top: 50%;
@@ -622,7 +626,8 @@ nav.navbar-light .navbar-nav .nav-link:hover {
 
 /* ABOUT US SECTION */
 .about-section,
-.trans-report-section {
+.trans-report-section,
+.pdf-files {
   padding-top: 5rem;
   padding-bottom: 5rem;
   background-color: #f8f9fa;
@@ -789,6 +794,10 @@ nav.navbar-light .navbar-nav .nav-link:hover {
 }
 
 /* INCOME/EXPENSES REPORT LOGS */
+.incom-exp-detail-page {
+  min-height: calc(100vh - 280px);
+}
+
 .income-exp-btn-wrap {
   display: flex;
   justify-content: flex-end;
@@ -800,6 +809,10 @@ nav.navbar-light .navbar-nav .nav-link:hover {
   max-width: none;
 }
 
+/* PDF REPORTS DETAILS PAGE */
+.pdf-reports-detail-page {
+  min-height: calc(100vh - 280px);
+}
 
 /* RESPONSIVE CSS */
 @media screen and (min-width: 576px) {
