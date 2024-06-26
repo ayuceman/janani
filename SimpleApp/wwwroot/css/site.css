@@ -780,11 +780,16 @@ div.modal .modal-dialog[role="document"] button.close:hover {
 }
 
 div.modal#newReportModal .modal-dialog {
-  max-height: 600px;
-  overflow: scroll;
+  max-width: 800px;
 }
 
-div.modal#newReportModal .modal-dialog button.close {
+div.modal#newReportModal .modal-dialog .modal-body {
+  max-height: 600px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+div.modal#newReportModal[aria-labelledby="newReportLabelModal"] .modal-dialog button.close {
   top: 0;
   left: auto;
   right: 0;
@@ -802,7 +807,8 @@ div.modal#newReportModal .modal-dialog button.close:hover span {
 }
 
 /* IMAGE CATEGORY PAGE */
-.img-cat-content-wrapper {
+.img-cat-content-wrapper,
+.login-page {
   min-height: calc(100vh - 270px);
 }
 
