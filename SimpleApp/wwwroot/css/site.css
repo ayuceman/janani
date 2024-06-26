@@ -626,9 +626,13 @@ nav.navbar-light .navbar-nav .nav-link:hover {
 
 /* ABOUT US SECTION */
 .about-section,
-.trans-report-section,
-.pdf-files {
+.trans-report-section {
   padding-top: 5rem;
+  padding-bottom: 5rem;
+  background-color: #f8f9fa;
+}
+
+.pdf-files {
   padding-bottom: 5rem;
   background-color: #f8f9fa;
 }
@@ -730,31 +734,31 @@ nav.navbar-light .navbar-nav .nav-link:hover {
 }
 
 /* IMAGE GALLERY MODAL POPUP */
-.modal .modal-dialog[role="document"] {
+div.modal .modal-dialog[role="document"] {
   transform: translate(-50%, -50%);
   top: 50%;
   left: 50%;
   margin: 0;
 }
 
-.modal .modal-dialog[role="document"] .form-group {
+div.modal .modal-dialog[role="document"] .form-group {
   margin-bottom: 1.5rem;
 }
 
-.modal .modal-dialog[role="document"] .form-group label {
+div.modal .modal-dialog[role="document"] .form-group label {
   font-weight: 500;
   margin-bottom: 0.5rem;
 }
 
-.modal .modal-dialog[role="document"] .modal-footer {
+div.modal .modal-dialog[role="document"] .modal-footer {
   justify-content: space-between;
 }
 
-.modal .modal-dialog[role="document"] .modal-footer button {
+div.modal .modal-dialog[role="document"] .modal-footer button {
   margin: 0;
 }
 
-.modal .modal-dialog[role="document"] button.close {
+div.modal .modal-dialog[role="document"] button.close {
   position: absolute;
   top: -15px;
   right: -15px;
@@ -766,13 +770,35 @@ nav.navbar-light .navbar-nav .nav-link:hover {
   box-shadow: 0px 2px 2px 0px rgb(0 0 0 / 15%);
 }
 
-.modal .modal-dialog[role="document"] button.close span {
+div.modal .modal-dialog[role="document"] button.close span {
   font-size: 25px;
 }
 
-.modal .modal-dialog[role="document"] button.close:hover {
+div.modal .modal-dialog[role="document"] button.close:hover {
   background-color: var(--color-secondary);
   color: #fff;
+}
+
+div.modal#newReportModal .modal-dialog {
+  max-height: 600px;
+  overflow: scroll;
+}
+
+div.modal#newReportModal .modal-dialog button.close {
+  top: 0;
+  left: auto;
+  right: 0;
+  margin: auto;
+  box-shadow: none;
+  padding: 0;
+}
+
+div.modal#newReportModal .modal-dialog button.close:hover {
+  background-color: transparent;
+}
+
+div.modal#newReportModal .modal-dialog button.close:hover span {
+  color: var(--color-secondary);
 }
 
 /* IMAGE CATEGORY PAGE */
@@ -809,10 +835,33 @@ nav.navbar-light .navbar-nav .nav-link:hover {
   max-width: none;
 }
 
+#income-expenses-reportsTable_wrapper table.dataTable thead th,
+#income-expenses-reportsTable_wrapper table.dataTable thead td,
+#income-expenses-reportsTable_wrapper table.dataTable tbody th,
+#income-expenses-reportsTable_wrapper table.dataTable tbody td,
+#reportsTable_wrapper table.dataTable thead th,
+#reportsTable_wrapper table.dataTable thead td,
+#reportsTable_wrapper table.dataTable tbody th,
+#reportsTable_wrapper table.dataTable tbody td {
+  padding: 15px 25px;
+  border: none;
+}
+
+#reportsTable {
+  padding-top: 24px;
+}
+
+.pdf-files table thead th {
+  background-color: #eee;
+}
+
 /* PDF REPORTS DETAILS PAGE */
 .pdf-reports-detail-page {
   min-height: calc(100vh - 280px);
 }
+
+
+
 
 /* RESPONSIVE CSS */
 @media screen and (min-width: 576px) {
