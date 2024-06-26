@@ -5,14 +5,14 @@
     ViewData["Title"] = "Log in";
 }
 
-<div class="login-page">
+<div class=" pt-4 pb-4">
     <div class="container">
         <h1 class="text-center pt-5 pb-3">@ViewData["Title"]</h1>
         <div class="row">
             <div class="col-12">
                 <section class="login-col">
                     <form id="account" method="post">
-                        <h2 class="text-center mb-3">Use a local account to log in.</h2>
+                        <h2 class="text-center pt-2 mb-3">Use a local account to log in.</h2>
                         <hr />
                         <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
                         <div class="form-floating mb-3">
@@ -32,7 +32,7 @@
                             </label>
                         </div>
                         <div>
-                            <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-primary">Log in</button>
+                            <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-primary ms-auto me-auto d-block">Log in</button>
                         </div>
             @*           <div>
                             <p>
