@@ -39,14 +39,15 @@
                 "dataSrc": ""
             },
             "columns": [
-                { "data": "dateInString" },
+                { "data": "dateInString"},
                 {
                     "data": "id",
                     "render": function (data, type, row) {
                         return `<button type="button" class="btn btn-primary" onclick="viewReport(${data})">
                                               <i class="fa-solid fa-file-lines" aria-hidden="true"></i> Report
                                     </button>`;
-                    }
+                    },
+                    "width": "15%"
                 }
             ]
         });

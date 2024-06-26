@@ -3,46 +3,14 @@
 
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
-    <style>
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 20px;
-        }
 
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-        }
-
-        th {
-            background-color: #f2f2f2;
-        }
-
-        input {
-            width: 100%;
-            box-sizing: border-box;
-        }
-
-        .income-expense-report {
-            overflow: scroll;
-        }
-    </style>
-
-    <div class="container" style="padding-bottom:10px;">
+    <div class="container">
         <h2>Income and Expenses Report</h2>
         <h3>Date: @Model.DateString</h3>
 
-        @if (!string.IsNullOrEmpty(Model.ErrorMessage))
-        {
-            <p style="color: red;">@Model.ErrorMessage</p>
-        }
-
-
-
         @if (Model.ReportList != null && Model.ReportList.Any())
         {
-            <div style="height:600px;margin-top: 50px;" class="income-expense-report">
+            <div class="income-expense-report">
 
                 @foreach (var group in Model.ReportList)
                 {
@@ -51,7 +19,7 @@
                         <thead class="thead-light">
                             <tr>
                                 <th>Name</th>
-                                <th>Amount</th>
+                                <th>Amount (NPR) </th>
                             </tr>
                         </thead>
                         <tbody>
@@ -59,7 +27,7 @@
                             {
                                 <tr class="data-row" data-category-id="@item.CategoryId">
                                     <td>@item.Name</td>
-                                    <td><input type="number" disabled class="form-control current-month" value="@item.CurrentMonthAmount" onchange="updateTotals()" /></td>
+                                <td>@item.CurrentMonthAmount</td>
                                 </tr>
                             }
                         </tbody>
@@ -75,16 +43,16 @@
                                         <strong>Expenses Total</strong>
                                     }
                                 </td>
-                            <td>@group.Total</td>
+                            <td>NPR @group.Total</td>
                             </tr>
                         </tfoot>
                     </table>
                 }
             </div>
 
-            <div class="row" style="padding:50px;">
-                <div class="col-6">
-                    <strong>Total = </strong><span>@Model.Total</span>
+            <div class="row">
+                <div class="col-6 total-amount">
+                <strong>Total = </strong><span> NPR @Model.Total</span>
                 </div>
             </div>
         }

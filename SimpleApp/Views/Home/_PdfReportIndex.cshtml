@@ -26,10 +26,11 @@
                 {
                     "data": "id",
                     "render": function (data, type, row) {
-                        return `<button type="button" class="btn btn-danger" onclick="downloadPdf(${data})">
+                        return `<button type="button" class="btn btn-download" onclick="downloadPdf(${data})">
                                         <i class="fa fa-download" aria-hidden="true"></i>
                                     </button>`;
-                    }
+                    },
+                    "width": "15%"
                 }
             ]
         });

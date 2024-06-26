@@ -1,19 +1,22 @@
 ﻿@model PaginatedList<ImageDetailsViewModel>
 
-<div class="container">
+<link rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@@fancyapps/ui@5.0/dist/fancybox/fancybox.css" />
 
+<div class="container">
+    Test
     <div class="row">
         @foreach (var item in Model.Items)
         {
-            <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
-                <div class="card">
-                    <img class="card-img-top" src="@item.ImagePath" alt="@item.AlternativeText">
-                    <div class="card-body">
-                        <h5 class="card-title">@item.ImageCategory</h5>
-                        <p class="card-text">Date: @item.UploadDate.ToShortDateString()</p>
+            <a href="@item.ImagePath" data-fancybox="gallery" data-caption="@item.ImageCategory" class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                    <div class="card">
+                        <img class="card-img-top" src="@item.ImagePath" alt="@item.AlternativeText">
+                        <div class="card-body">
+                            <h5 class="card-title">@item.ImageCategory</h5>
+                            <p class="card-text">Date: @item.UploadDate.ToShortDateString()</p>
+                        </div>
                     </div>
-                </div>
-            </div>
+            </a>
         }
     </div>
 
@@ -42,3 +45,10 @@
 </div>
 
 
+<script src="https://cdn.jsdelivr.net/npm/@@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
+
+<script>
+    Fancybox.bind("[data-fancybox='gallery']", {
+        // Your custom options
+    });
+</script>
