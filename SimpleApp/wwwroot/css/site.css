@@ -916,6 +916,19 @@ div.modal#newReportModal .modal-dialog button.close:hover span {
   min-height: calc(100vh - 280px);
 }
 
+.pdf-reports-detail-page table th,
+.pdf-reports-detail-page table td {
+  padding: 15px 25px;
+}
+
+.pdf-reports-detail-page table th {
+  background-color: #eee;
+}
+
+.pdf-reports-detail-page table td .btn {
+  margin-right: 10px;
+}
+
 /* LOGIN PAGE */
 .login-page .login-col {
   max-width: 600px;
