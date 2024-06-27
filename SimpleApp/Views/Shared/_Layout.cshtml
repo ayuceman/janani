@@ -97,16 +97,29 @@
             </div>
         </nav>
     </header>*@
-
     
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+    <main role="main" class="pb-3">
+        @RenderBody()
+    </main>
 
-    <footer class="site-footer text-muted pt-4 pb-4">
-        <div class="container">
-            <div class="footer-logo"><a href="/">Janani</a></div>
-            <div class="footer-bottom d-flex justify-content-between">
+    <footer class="site-footer pt-5">
+        <div class="footer-top pb-3">
+            <div class="container">
+                <div class="footer-logo text-center"><a href="/">Janani</a></div>
+                
+                <div class="footer-contacts contact-list pt-3">
+                        <ul class="list-unstyled d-flex  justify-content-center">
+                            <li><i class="fa-solid fa-location-dot"></i>Address, City, Kathmandu,
+                                Nepal</li>
+                            <li><i class="fa-solid fa-phone"></i><a href="tel:+1-234-567-890">+1-234-567-890</a></li>
+                            <li><i class="fa-solid fa-envelope"></i><a href="mailto:abcd@xyz.co">abcd@xyz.co</a></li>
+                        </ul>
+                    </div>
+
+            </div>
+        </div>
+        <div class="footer-bottom pt-3 pb-3">
+            <div class="container d-flex justify-content-between">
                 <p class="copyright-text mb-0">&copy; 2024 - Janani</p>
                 <div class="footer-bootom-links">
                     <ul class="list-unstyled d-flex gap-10 mb-0">
@@ -117,12 +130,6 @@
             </div>
         </div>
     </footer>
-
-    @*<footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2024 - SimpleApp - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer> *@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
         integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
