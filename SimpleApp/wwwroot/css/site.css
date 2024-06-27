@@ -438,6 +438,27 @@ h6 {
   margin-bottom: 1rem;
 }
 
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+th,
+td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+input {
+  width: 100%;
+  box-sizing: border-box;
+}
+
 /* BUTTONS */
 .btn.btn-primary {
   background-color: var(--color-primary);
@@ -655,6 +676,24 @@ nav.navbar-light .navbar-nav .nav-link:hover {
   object-fit: cover;
 }
 
+.gallery-section .paging-image a {
+  text-decoration: none;
+}
+
+.gallery-section .pagination {
+  position: relative;
+  justify-content: space-between;
+  gap: 15px;
+  padding-right: 110px;
+  min-height: 45px;
+}
+
+.gallery-section .pagination .btn.page-next {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
 /* INCOME/EXPENSES SECTION */
 .trans-report-section table {
   width: 100%;
@@ -676,6 +715,23 @@ nav.navbar-light .navbar-nav .nav-link:hover {
 
 .trans-report-section table tfoot td {
   padding-top: 15px;
+}
+
+/* INCOME/EXPENSE REPORT */
+.income-expense-report {
+  max-height: 600px;
+  overflow: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.income-expense-report table tbody {
+  background-color: #f8f9fa;
+}
+
+.income-expense-report table td {
+  padding: 10px 20px;
+  border: 1px solid #ddd;
 }
 
 /* CONTACT SECTION */
@@ -781,12 +837,6 @@ div.modal .modal-dialog[role="document"] button.close:hover {
 
 div.modal#newReportModal .modal-dialog {
   max-width: 800px;
-}
-
-div.modal#newReportModal .modal-dialog .modal-body {
-  max-height: 600px;
-  overflow-y: scroll;
-  overflow-x: hidden;
 }
 
 div.modal#newReportModal[aria-labelledby="newReportLabelModal"] .modal-dialog button.close {
@@ -906,29 +956,4 @@ div.modal#newReportModal .modal-dialog button.close:hover span {
   }
 }
 
-//income expenses modal pop
-
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 20px;
-}
-
-th, td {
-    border: 1px solid #ddd;
-    padding: 8px;
-}
-
-th {
-    background-color: #f2f2f2;
-}
-
-input {
-    width: 100%;
-    box-sizing: border-box;
-}
-
-.income-expense-report {
-    overflow: scroll;
-}
+/* income expenses modal pop */

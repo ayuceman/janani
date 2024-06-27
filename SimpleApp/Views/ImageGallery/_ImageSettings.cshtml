@@ -11,7 +11,7 @@
                 <i class="fa fa-plus" aria-hidden="true"></i>
                 Upload Image
             </button>
-            <button type="button" onclick="imageCategory()" class="btn btn-primary">
+            <button type="button" onclick="imageCategory()" class="btn btn-secondary">
                 Categories
             </button>
         </div>
@@ -35,7 +35,7 @@
                         <td>@item.ImageCategory</td>
                         <td>@item.AlternativeText</td>
                         <td>
-                            <button type="button" class="btn btn-danger" onclick="deleteImage(@item.Id)">
+                            <button type="button" class="btn btn-primary" onclick="deleteImage(@item.Id)">
                                 <i class="fa fa-trash" aria-hidden="true"></i>
                             </button>
                         </td>
@@ -44,14 +44,14 @@
             </tbody>
         </table>
 
-        <div>
+        <div class="pagination">
             @if (Model.HasPreviousPage)
             {
                 @Html.ActionLink(
                         "Previous",
                         "ImageDetailsList",
                         new { page = Model.PageIndex - 1 },
-                        new { @class = "btn btn-primary", style = "margin: 5px;" }
+                        new { @class = "btn btn-primary"}
                         )
 
             }
@@ -61,7 +61,7 @@
                         "Next",
                         "ImageDetailsList",
                         new { page = Model.PageIndex + 1 },
-                        new { @class = "btn btn-primary", style = "margin: 5px;" }
+                        new { @class = "btn btn-primary"}
                         )
 
             }
@@ -78,7 +78,6 @@
                     </div>
                     <div class="modal-body">
                     </div>
-
                 </div>
             </div>
         </div>

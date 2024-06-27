@@ -5,8 +5,10 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
 
     <div class="container">
-        <h2>Income and Expenses Report</h2>
-        <h3>Date: @Model.DateString</h3>
+        <div class="d-flex justify-content-between mb-2 align-items-center">
+            <h2 class="fs-4">Income and Expenses Report</h2>
+            <span class="fs-6">Date: @Model.DateString</span>
+        </div>
 
         @if (Model.ReportList != null && Model.ReportList.Any())
         {

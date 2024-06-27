@@ -31,10 +31,10 @@
                         <td>@item.Description</td>
                         <td>@item.CreatedBy</td>
                         <td class="table-btn-wrap">
-                            <button type="button" class="btn btn-success" onclick="editCategory(@item.Id)">
+                            <button type="button" class="btn btn-primary" onclick="editCategory(@item.Id)">
                                 <i class="fa-solid fa-pen-to-square" aria-hidden="true"></i>
                             </button>
-                            <button type="button" class="btn btn-danger" onclick="deleteCategory(@item.Id)">
+                            <button type="button" class="btn btn-secondary" onclick="deleteCategory(@item.Id)">
                                 <i class="fa fa-trash" aria-hidden="true"></i>
                             </button>
                         </td>
@@ -66,7 +66,7 @@
                         "Previous",
                         "Index",
                         new { page = Model.PageIndex - 1 },
-                        new { @class = "btn btn-primary", style = "margin: 5px;" }
+                        new { @class = "btn btn-primary"}
                         )
 
             }
@@ -76,7 +76,7 @@
                         "Next",
                         "Index",
                         new { page = Model.PageIndex + 1 },
-                        new { @class = "btn btn-primary", style = "margin: 5px;" }
+                        new { @class = "btn btn-primary"}
                         )
 
             }

@@ -30,10 +30,10 @@
                         <td>@item.CreatedBy</td>
                         <td>@item.CreatedTs</td>
                         <td>
-                            <button type="button" class="btn btn-success" onclick="editViewReport(@item.Id)">
+                            <button type="button" class="btn btn-primary" onclick="editViewReport(@item.Id)">
                                 <i class="fa-solid fa-file-lines" aria-hidden="true"></i> Report
                             </button>
-                            <button type="button" class="btn btn-danger" onclick="deleteReport(@item.Id)">
+                            <button type="button" class="btn btn-secondary" onclick="deleteReport(@item.Id)">
                                 <i class="fa fa-trash" aria-hidden="true"></i>
                             </button>
                         </td>
@@ -58,14 +58,14 @@
             </div>
         </div>
 
-        <div>
+        <div class="pagination">
             @if (Model.HasPreviousPage)
             {
                 @Html.ActionLink(
                         "Previous",
                         "Index",
                         new { page = Model.PageIndex - 1 },
-                        new { @class = "btn btn-primary", style = "margin: 5px;" }
+                        new { @class = "btn btn-primary"}
                         )
 
             }
@@ -75,7 +75,7 @@
                         "Next",
                         "Index",
                         new { page = Model.PageIndex + 1 },
-                        new { @class = "btn btn-primary", style = "margin: 5px;" }
+                        new { @class = "btn btn-primary"}
                         )
 
             }

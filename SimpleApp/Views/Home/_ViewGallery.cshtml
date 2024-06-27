@@ -20,14 +20,14 @@
         }
     </div>
 
-    <div class="pagination" style="margin-bottom: 20px; text-align: right;">
+    <div class="pagination">
         @if (Model.HasPreviousPage)
         {
             @Html.ActionLink(
                      "Previous",
                      "Index",
                      new { page = Model.PageIndex - 1 },
-                     new { @class = "btn btn-primary", style = "margin: 5px;" }
+                     new { @class = "btn btn-primary page-prev", style = "margin: 5px;" }
                      )
 
         }
@@ -37,7 +37,7 @@
                      "Next",
                      "Index",
                      new { page = Model.PageIndex + 1 },
-                     new { @class = "btn btn-primary", style = "margin: 5px;" }
+                     new { @class = "btn btn-primary page-next", style = "margin: 5px;" }
                      )
 
         }
@@ -48,7 +48,5 @@
 <script src="https://cdn.jsdelivr.net/npm/@@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
 
 <script>
-    Fancybox.bind("[data-fancybox='gallery']", {
-        // Your custom options
-    });
+    Fancybox.bind("[data-fancybox='gallery']");
 </script>
