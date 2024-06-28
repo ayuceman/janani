@@ -180,9 +180,9 @@
 </head>
 <body>
     <div class="income-expense-report-detail-page pt-4 pb-4">
-        <a href="#" onclick="backToLog()">Back To Report Log</a>
         <div class="container">
-            <div class="d-flex justify-content-between title-section">
+            <a href="#" onclick="backToLog()" class="pt-3 d-inline-block"><i class="fa-solid fa-angle-left me-2"></i>Back To Report Log</a>
+            <div class="d-flex justify-content-between title-section pt-3 pb-4">
                 <h2>Income and Expenses Report</h2>
                 <span>Date: @Model.DateString</span>
             </div>
@@ -195,7 +195,7 @@
             @if (Model.ReportList != null && Model.ReportList.Any())
             {
                 <div class="income-expense-report">
-                    <button onclick="saveChanges()" class="btn btn-primary">Save Changes</button>
+                    <button onclick="saveChanges()" class="btn btn-primary" type="submit">Save Changes</button>
                     @foreach (var group in Model.ReportList)
                     {
                         <h4>@group.Category</h4>
