@@ -5,21 +5,18 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 <div class="container pt-5 pb-5">
-    <button type="button" onclick="imageSettings()" class="btn btn-primary">
-        <i class="fa fa-cog" aria-hidden="true"></i> Image Settings
-    </button>
-
+    <button type="button" onclick="imageSettings()" class="btn btn-primary"><i class="fa fa-cog" aria-hidden="true"></i> Image Settings</button>
     <h3 class="text-center pb-4">Image Gallery</h3>
+
     <div class="row mb-4">
         <div class="col-md-3">
-
             <div class="form-group">
                 @Html.Label("ImageCategoryId", "Category")
                 @Html.DropDownList("ImageCategoryId", (SelectList)ViewBag.CategoryList, "-- Select category --", new { @class = "form-control" })
                 @Html.ValidationMessage("ImageCategoryId", "", new { @class = "text-danger" })
             </div>
-
         </div>
+
         <div class="col-md-3">
             <label for="fromDate">From Date</label>
             <input type="text" id="fromDate" class="form-control datepicker" placeholder="Select from date">
@@ -29,10 +26,7 @@
             <input type="text" id="toDate" class="form-control datepicker" placeholder="Select to date">
         </div>
         <div class="col-md-3">
-            <button type="button" class="btn btn-primary mt-4" onclick="applyFilters(1)">
-                <i class="fa fa-search" aria-hidden="true"></i>
-                Search
-            </button>
+            <button type="button" class="btn btn-primary mt-4" onclick="applyFilters(1)"><i class="fa fa-search" aria-hidden="true"></i> Search</button>
         </div>
     </div>
 
@@ -50,10 +44,7 @@
 <!-- jQuery UI for datepicker -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.3/jquery-ui.min.js" integrity="sha512-Ww1y9OuQ2kehgVWSD/3nhgfrb424O3802QYP/A5gPXoM4+rRjiKrjHdGxQKrMGQykmsJ/86oGdHszfcVgUr4hA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-@*<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-
-<!-- Multi-select library (e.g., select2) -->
+@*<!-- Multi-select library (e.g., select2) -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script> *@
 

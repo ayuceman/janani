@@ -536,7 +536,7 @@ nav.navbar-light .navbar-nav .nav-link:hover {
 }
 
 .heder-user-nav-section .user-name:hover {
-  color: var(--color-primary);
+  color: var(--color-primary) !important;
 }
 
 /* HERO SECTION */
@@ -751,6 +751,10 @@ nav.navbar-light .navbar-nav .nav-link:hover {
 .contact-list a {
   text-decoration: none;
   color: var(--color-primary)
+}
+
+.contact-list a:hover {
+  color: var(--color-heading);
 }
 
 .contact-list>ul {
