@@ -20,8 +20,8 @@
                                         <td><input type="text" class="form-control name" value="" /></td>
                                         <td><input type="number" class="form-control current-month" value="0" onchange="updateTotals()" /></td>
                                         <td>
-                                            <button type="button" onclick="addRow(this.closest('.category'))" class="btn btn-success">Add Row</button>
-                                            <button type="button" onclick="removeRow(this)" class="btn btn-danger">Remove</button>
+                                            <button type="button" onclick="addRow(this.closest('.category'))" class="btn btn-primary">Add Row</button>
+                                            <button type="button" onclick="removeRow(this)" class="btn btn-secondary">Remove</button>
                                         </td>
                                     `;
 
@@ -46,12 +46,12 @@
                 if (index === rows.length - 1) {
                     actionsCell.innerHTML = `
                                                 <button type="button" onclick="addRow(this.closest('.category'))" class="btn btn-success">Add Row</button>
-                                                <button type="button" onclick="removeRow(this)" class="btn btn-danger">Remove</button>
+                                                <button type="button" onclick="removeRow(this)" class="btn btn-secondary">Remove</button>
                                             `;
                 } else {
 
                         actionsCell.innerHTML = `
-                                                        <button type="button" onclick="removeRow(this)" class="btn btn-danger">Remove</button>
+                                                        <button type="button" onclick="removeRow(this)" class="btn btn-secondary">Remove</button>
                                                     `;
 
                 }
