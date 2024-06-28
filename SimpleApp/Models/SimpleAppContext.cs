@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
+using SimpleApp.Constants;
 
 namespace SimpleApp.Models;
 
@@ -40,8 +41,7 @@ public partial class SimpleAppContext : DbContext
     public virtual DbSet<ReportFile> ReportFiles { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Data Source=AITSLPT-AVISHEK;Initial Catalog=SimpleApp;Integrated Security=True;Persist Security Info=False;MultipleActiveResultSets=true;TrustServerCertificate=True;Encrypt=False");
+        => optionsBuilder.UseSqlServer(ConnectionConstants.ConnectionStr);
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

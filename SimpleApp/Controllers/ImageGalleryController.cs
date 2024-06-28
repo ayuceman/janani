@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SimpleApp.BaseModel;
@@ -86,6 +87,8 @@ namespace SimpleApp.Controllers
 
             if (model.FromDate != null && model.ToDate != null)
             {
+                model.FromDate = model.FromDate.Value.AddDays(-1);
+                model.ToDate = model.ToDate.Value.AddDays(1);
                 imageList = imageList.Where(x => x.UploadDate.Date >= model.FromDate.Value.Date && x.UploadDate <= model.ToDate.Value.Date);
             }
             #endregion

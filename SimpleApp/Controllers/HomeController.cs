@@ -42,13 +42,16 @@ namespace SimpleApp.Controllers
                     UploadDate = x.UploadedTs
                 }).OrderByDescending(x => x.Id).AsQueryable();
 
+
             model.ImageGallery = PaginatedList<ImageDetailsViewModel>.Create(imageList, filterModel.Page, 12);
+
+
 
             #endregion
 
             #region Income Expenses
 
-            
+
             var logDetails = await _context.IncomeExpensesLogs.FirstOrDefaultAsync();
 
             if(logDetails != null)
@@ -85,11 +88,17 @@ namespace SimpleApp.Controllers
 
                 }
             }
-         
+
 
 
 
             #endregion
+
+            var categories = await _context.ImageCategories.Where(x => !x.IsDeleted).ToListAsync();
+
+            var categoryList = new SelectList(categories, "Id", "Name");
+
+            ViewBag.CategoryList = categoryList;
 
             return View(model);
 
@@ -164,5 +173,42 @@ namespace SimpleApp.Controllers
             return PartialView("_ViewInfoReport", result);
         }
 
+
+        public IActionResult SearchIndex(ImageSearchViewModel model)
+        {
+            int pageSize = 12;
+
+            var imageList = _context.ImageDetails
+                .Include(x => x.ImageCategory).Where(x => !x.ImageCategory.IsDeleted)
+                .Select(x => new ImageDetailsViewModel()
+                {
+                    Id = x.Id,
+                    AlternativeText = x.AlternativeText,
+                    ImageName = x.ImageName,
+                    ImagePath = Path.Combine("/uploads", x.ImageName),
+                    ImageCategory = x.ImageCategory.Name,
+                    ImageCategoryId = x.ImageCategoryId,
+                    UploadDate = x.UploadedTs
+                }).OrderByDescending(x => x.Id).AsQueryable();
+
+            #region Filters
+
+            if (model.CategoryId != null && model.CategoryId > 0)
+            {
+                imageList = imageList.Where(x => x.ImageCategoryId == model.CategoryId);
+            }
+
+            if (model.FromDate != null && model.ToDate != null)
+            {
+                model.FromDate = model.FromDate.Value.AddDays(-1);
+                model.ToDate = model.ToDate.Value.AddDays(1);
+                imageList = imageList.Where(x => x.UploadDate.Date >= model.FromDate.Value.Date && x.UploadDate <= model.ToDate.Value.Date);
+            }
+            #endregion
+
+            var paginatedList = PaginatedList<ImageDetailsViewModel>.Create(imageList, model.Page, pageSize);
+
+            return PartialView("_ViewGallery", paginatedList);
+        }
     }
 }
