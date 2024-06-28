@@ -1,6 +1,5 @@
 ﻿@model PaginatedList<ImageCategoryModel>
 
-
 <div class="img-cat-content-wrapper">
     <div class="container">
         <a href="#" onclick="backToGallery()"><i class="fa-solid fa-angle-left"></i>Back To Image Settings</a>
@@ -32,10 +31,10 @@
                         <td>@item.CreatedBy</td>
                         <td class="table-btn-wrap">
                             <button type="button" class="btn btn-primary" onclick="editCategory(@item.Id)">
-                                <i class="fa-solid fa-pen-to-square" aria-hidden="true"></i>
+                                <i class="fa-solid fa-pen-to-square" aria-hidden="true"></i> Edit
                             </button>
                             <button type="button" class="btn btn-secondary" onclick="deleteCategory(@item.Id)">
-                                <i class="fa fa-trash" aria-hidden="true"></i>
+                                <i class="fa fa-trash" aria-hidden="true"></i> Delete
                             </button>
                         </td>
                     </tr>
