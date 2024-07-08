@@ -16,7 +16,7 @@ using Microsoft.AspNetCore.WebUtilities;
 
 namespace SimpleApp.Areas.Identity.Pages.Account
 {
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class ForgotPasswordModel : PageModel
     {
         private readonly UserManager<IdentityUser> _userManager;

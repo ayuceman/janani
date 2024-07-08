@@ -67,6 +67,13 @@
                             <li class="nav-item">
                                 <a class="nav-link" asp-area="" asp-controller="PdfReport" asp-action="Index">Report Files</a>
                             </li>
+                                @if (User.IsInRole("Admin"))
+                                {
+                                    
+                                <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-controller="Account" asp-action="Index">Manage Users</a>
+                            </li>
+                                }
                             }
                            
                         </ul>

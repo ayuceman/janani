@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using SimpleApp.Constants;
+using SimpleApp.Data;
 using AuthDB = SimpleApp.Data;
 using OtherDB = SimpleApp.Models;
 
@@ -19,11 +20,17 @@ namespace SimpleApp
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
             builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                  .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<AuthDB.ApplicationDbContext>();
+
+
             builder.Services.AddControllersWithViews();
 
             builder.Services.AddDbContext<OtherDB.SimpleAppContext>(options =>
             options.UseSqlServer(ConnectionConstants.ConnectionStr));
+
+       
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
